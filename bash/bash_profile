@@ -1,0 +1,32 @@
+# -*-Shell-script-*- -> emacs file-local-variable
+
+# env variables
+pretty_git_branch() {
+    git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
+}
+
+CONFIG_DIR="~/.config/"
+EDITOR="emacs"
+HISTFILE=~/.config/bash/bash_history
+PATH=$PATH:/opt/homebrew/bin
+PS1="\W\$(pretty_git_branch) $ "
+
+# mac-specific
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# keybinds
+
+## builtin utilities / defaults
+alias e="emacs"
+alias erc="e ${CONFIG_DIR}/emacs/init.el"
+alias ls="ls -AGl"
+alias shbs="e ${CONFIG_DIR}/bash/bootstrap.sh"
+alias shrc="e ${CONFIG_DIR}/bash/bash_profile"
+alias src="source ${CONFIG_DIR}/bash/bash_profile"
+alias tmrc="e ${CONFIG_DIR}/tmux/tmux.conf"
+
+## git
+alias gs="git status"
+
+## tmux
+alias tma="tmux attach"

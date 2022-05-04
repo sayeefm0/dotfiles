@@ -1,0 +1,9 @@
+name: Bootstrap Develop Environment
+on: [push]
+jobs:
+  bootstrap-dev-environment:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          bash ./bash/bootstrap.sh
