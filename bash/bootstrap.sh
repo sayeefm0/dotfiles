@@ -28,22 +28,27 @@
 #  chsh -s /bin/bash
 #fi
 
+# change default shell to bash
+if "$SHELL" != "/bin/bash"
+then
+  echo "changing shell to bash"
+  chsh -s /bin/bash
+fi
+  
+# install homebrew if not available
+
 if ! command -v brew &> /dev/null
 then
   echo "installing homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-# if ! [ -f ~/.config/iterm2/Nord.itermcolors ]
-# then
-#   echo "not wutt"
-#   echo "downloading nord for iterm"
-# fi
 
 brew tap homebrew/cask-fonts
+brew tap d12frosted/emacs-plus
+
 brew install --cask font-jetbrains-mono
 brew install tmux
-# curl 'https://raw.githubusercontent.com/arcticicestudio/nord-tmux/develop/nord.tmux' -o ~/.config/tmux/nord.tmux
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 brew tap d12frosted/emacs-plus
 brew reinstall gcc libgccjit
 brew install emacs-plus --with-native-comp --without-cocoa

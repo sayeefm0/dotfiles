@@ -1,6 +1,7 @@
 ;; misc builtin configuration
 (setq backup-directory-alist `(("." . "~/.config/emacs/backup")))
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
 
 ;; additional packages
 
