@@ -49,3 +49,4 @@
 (define-key vim-like "O" '(lambda () (interactive)(move-end-of-line 0)(newline)))
 (define-key vim-like "s" 'avy-goto-char-2)
 (define-key vim-like "t" 'zap-up-to-char)
+(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)

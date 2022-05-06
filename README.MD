@@ -11,3 +11,36 @@
 ![tmux](https://img.shields.io/badge/tmux-v3.2a-gray?style=for-the-badge&logo=tmux&labelColor=0AC18E&logoColor=white)
 
 </div>
+
+# Things to fix
+ --------------------------------
+ things done manually
+ --------------------------------
+ 
+ install iterm2
+ change theme to minimal
+ import nord color theme
+ blinking cursor
+ change font to jetbrains mono
+ change vertical height to 115
+ change text size to 14
+
+ dock -----
+ minimize dock size
+ uncheck indicators for open applications
+ uncheck recent applications in dock
+ uncheck animate opening applications
+ remove all apps from dock
+ 
+ keys -----
+ remap caps lock to ctrl
+
+ trackpad -
+ tap to click
+
+ install homebrew
+if "$SHELL" != "/bin/bash"
+then
+  echo "changing shell to bash..."
+  chsh -s /bin/bash
+fi

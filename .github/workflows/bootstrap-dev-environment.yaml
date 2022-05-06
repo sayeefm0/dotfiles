@@ -1,5 +1,8 @@
 name: Bootstrap Develop Environment
-on: [push]
+on:
+  push:
+  schedule:
+    - cron '0 12 * * *'
 jobs:
   bootstrap-dev-environment:
     runs-on: macos-12

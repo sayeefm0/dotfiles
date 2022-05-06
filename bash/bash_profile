@@ -5,9 +5,9 @@ pretty_git_branch() {
     git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
 }
 
-CONFIG_DIR="~/.config/"
+CONFIG_DIR="~/dotfiles/"
 EDITOR="emacs"
-HISTFILE=~/.config/bash/bash_history
+HISTFILE=~/"$CONFIG_DIR"/bash/bash_history
 PATH=$PATH:/opt/homebrew/bin
 PS1="\W\$(pretty_git_branch) $ "
 

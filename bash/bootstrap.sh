@@ -1,34 +1,8 @@
-# --------------------------------
-# things done manually
-# --------------------------------
-# 
-# install iterm2
-# change theme to minimal
-# import nord color theme
-# blinking cursor
-# change font to jetbrains mono
-# change vertical height to 115
-# change text size to 14
-#
-# dock -----
-# minimize dock size
-# uncheck indicators for open applications
-# uncheck recent applications in dock
-# uncheck animate opening applications
-# remove all apps from dock
-# 
-# keys -----
-# remap caps lock to ctrl
-#
-# trackpad -
-# tap to click
-#
-# install homebrew
-#if "$SHELL" != "/bin/bash"
-#then
-#  echo "changing shell to bash..."
-#  chsh -s /bin/bash
-#fi
+# TODO
+# - run as sudo to avoid password prompting
+# - re-use some environment variable for the dotfiles dir?
+set -e
+DOTFILES_DIR=~/dotfiles
 
 # --------------------------------
 # information
@@ -52,12 +26,20 @@ echo "See github.com/bbflower/dotfiles/bash/bootstrap.sh to see exactly what's h
 echo
 
 # --------------------------------
+# utility functions
+# --------------------------------
+
+isSudo() {
+    sudo -nv &>/dev/null
+    echo $?
+}
+
+# --------------------------------
 # shell
 # --------------------------------
 
-if "$SHELL" != "/bin/bash"; then
- echo "changing shell to bash..."
- chsh -s /bin/bash
+if [ "$SHELL" != "/bin/bash" ] && [ -f /bin/bash ] && [ $(isSudo) -eq 0 ]; then
+    chsh -s /bin/bash
 fi
 
 # --------------------------------
@@ -81,12 +63,12 @@ if ! brew list | grep libgccjit &>/dev/null; then
 else
     brew reinstall libgccjit &>/dev/null
 fi
-brew install emacs-plus --with-native-comp --without-cocoa &>/dev/null
+brew install emacs-plus@28 --with-native-comp --without-cocoa &>/dev/null
 
 # tmux
 brew install tmux &>/dev/null
 # TODO: handle dynamic paths here
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm  &>/dev/null
+git clone https://github.com/tmux-plugins/tpm ~/"$DOTFILES_DIR"/tmux/plugins/tpm  &>/dev/null
 
 # fonts
 brew tap homebrew/cask-fonts &>/dev/null
@@ -99,17 +81,22 @@ brew install gh &>/dev/null
 # symlinking dotfiles
 # --------------------------------
 
-ln -s ~/.config/bash/bash_profile ~/.bash_profile
-ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf
-ln -s ~/.config/emacs ~/.emacs.d
+if ! [ -f ~/.bash_profile ]; then
+    ln -s ~/"$DOTFILES_DIR"/bash/bash_profile ~/.bash_profile
+fi
+if ! [ -f ~/.tmux.conf ]; then
+    ln -s ~/"$DOTFILES_DIR"/tmux/tmux.conf ~/.tmux.conf
+fi
+if ! [ -f ~/.emacs.d ]; then
+    ln -s ~/"$DOTFILES_DIR"/emacs ~/.emacs.d
+fi
 
 # --------------------------------
 # validation
 # --------------------------------
 
-echo $SHELL | grep bash >/dev/null
 brew --version >/dev/null
-emacs --version | grep 28 >/dev/null
+emacs --version >/dev/null
 brew list | grep emacs-plus >/dev/null
-tmux -V | grep 3.2 >/dev/null
+tmux -V >/dev/null
 gh --version >/dev/null
