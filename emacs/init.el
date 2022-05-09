@@ -1,6 +1,6 @@
 ;;; init.el --- emacs configuration file
 ;;; Commentary:
-;; This file only contains configuration for builtin emacs functionality, including:
+;; This file only contains configuration for builtin Emacs functionality, including:
 ;; - defining keymaps
 ;; - bindings for builtin functions
 ;;
@@ -25,14 +25,14 @@
 (menu-bar-mode -1)
 
 ;; keybinds for default functions
-
+(defvar vim-like)
 (define-prefix-command 'vim-like)    ; custom keymap for bindings i miss from vim
 (global-set-key "\C-d" vim-like)
 
 (define-key vim-like "f" 'zap-to-char)
 (define-key vim-like "t" 'zap-up-to-char)
-(define-key vim-like "o" '(lambda () (interactive)(move-end-of-line 1)(newline)))
-(define-key vim-like (kbd "C-o") '(lambda () (interactive)(move-end-of-line 0)(newline)))
+(define-key vim-like "o" #'(lambda () (interactive)(move-end-of-line 1)(newline)))
+(define-key vim-like (kbd "C-o") #'(lambda () (interactive)(move-end-of-line 0)(newline)))
 (define-key vim-like (kbd "c i w") '(lambda () (interactive) (forward-word)(backward-word)(kill-word 1)))
 
 ;; load additional configuration files
@@ -42,6 +42,7 @@
 (require 'init-ace)
 (require 'init-avy)
 (require 'init-company)
+(require 'init-flycheck)
 (require 'init-magit)
 (require 'init-projectile)
 (require 'init-selectrum)
@@ -49,3 +50,4 @@
 (require 'init-yaml)
 
 (provide 'init)
+;;; init.el ends here

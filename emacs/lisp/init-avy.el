@@ -5,6 +5,6 @@
 (straight-use-package 'avy)
 
 (define-key vim-like (kbd "C-l") 'avy-goto-line)
-(define-key vim-like (kbd "C-s") 'avy-goto-char-2)
+(define-key vim-like (kbd "C-s") 'avy-goto-char)
 
 (provide 'init-avy)
