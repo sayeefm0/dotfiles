@@ -1,29 +1,34 @@
 # -*-Shell-script-*- -> emacs file-local-variable
 
-# env variables
+# path
+PATH="${PATH}:/opt/homebrew/bin"
+PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
+
+# prompt
 pretty_git_branch() {
     git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
 }
+PS1="\W\$(pretty_git_branch) $ "
 
+# other environment variables
+export BASH_SILENCE_DEPRECATION_WARNING=1 # apple doesn't want us to use bash
 CONFIG_DIR="~/dotfiles/"
 EDITOR="emacs"
 HISTFILE=~/"$CONFIG_DIR"/bash/bash_history
-PATH=$PATH:/opt/homebrew/bin
-PS1="\W\$(pretty_git_branch) $ "
 
-# mac-specific
-export BASH_SILENCE_DEPRECATION_WARNING=1
+# aliases
 
-# keybinds
-
-## builtin utilities / defaults
+## common
 alias e="emacs"
 alias erc="e ${CONFIG_DIR}/emacs/init.el"
-alias ls="ls -AGl"
 alias shbs="e ${CONFIG_DIR}/bash/bootstrap.sh"
 alias shrc="e ${CONFIG_DIR}/bash/bash_profile"
 alias src="source ${CONFIG_DIR}/bash/bash_profile"
 alias tmrc="e ${CONFIG_DIR}/tmux/tmux.conf"
+
+## gnu utilities
+alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
 
 ## git
 alias gd="git diff"
