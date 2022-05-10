@@ -31,8 +31,9 @@
 
 (define-key vim-like "f" 'zap-to-char)
 (define-key vim-like "t" 'zap-up-to-char)
-(define-key vim-like "o" #'(lambda () (interactive)(move-end-of-line 1)(newline)))
-(define-key vim-like (kbd "C-o") #'(lambda () (interactive)(move-end-of-line 0)(newline)))
+(define-key vim-like (kbd "C-d") 'delete-char)
+(define-key vim-like (kbd "C-o")  #'(lambda () (interactive)(move-end-of-line 1)(newline)))
+(define-key vim-like "o"  #'(lambda () (interactive)(move-end-of-line 0)(newline)))
 (define-key vim-like (kbd "c i w") '(lambda () (interactive) (forward-word)(backward-word)(kill-word 1)))
 
 ;; load additional configuration files

@@ -76,6 +76,8 @@ brew install --cask font-jetbrains-mono &>/dev/null
 
 # other packages
 brew install gh &>/dev/null
+brew install ripgrep &>/dev/null
+brew install fd &>/dev/null
 
 # --------------------------------
 # symlinking dotfiles
