@@ -4,6 +4,7 @@
 
 (straight-use-package 'nord-theme)
 
+(setq nord-region-highlight 'frost)
 (load-theme 'nord t)
 
 (provide 'init-theme)

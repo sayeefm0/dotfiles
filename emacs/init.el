@@ -7,8 +7,6 @@
 ;; Configuration for additional packages can be found in lisp/init-<package>.el or lisp/init-<feature>.el for
 ;; single feature functionality (e.g. rust-lang support) that requires coordination across multiple packages
 
-;; modular configuration files are in lisp/
-
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; better defaults for vars
@@ -24,17 +22,17 @@
 (hl-line-mode 1)
 (menu-bar-mode -1)
 
-;; keybinds for default functions
+;; custom keymap for bindings I miss from vim
+
 (defvar vim-like)
-(define-prefix-command 'vim-like)    ; custom keymap for bindings i miss from vim
+(define-prefix-command 'vim-like)
 (global-set-key "\C-d" vim-like)
 
-(define-key vim-like "f" 'zap-to-char)
-(define-key vim-like "t" 'zap-up-to-char)
+(define-key vim-like (kbd "C-f") 'zap-to-char)
+(define-key vim-like (kbd "C-t") 'zap-up-to-char)
 (define-key vim-like (kbd "C-d") 'delete-char)
 (define-key vim-like (kbd "C-o")  #'(lambda () (interactive)(move-end-of-line 1)(newline)))
-(define-key vim-like "o"  #'(lambda () (interactive)(move-end-of-line 0)(newline)))
-(define-key vim-like (kbd "c i w") '(lambda () (interactive) (forward-word)(backward-word)(kill-word 1)))
+(define-key vim-like (kbd "C-w") #'(lambda () (interactive) (forward-word)(backward-word)(kill-word 1)))
 
 ;; load additional configuration files
 
@@ -45,9 +43,12 @@
 (require 'init-company)
 (require 'init-flycheck)
 (require 'init-magit)
+(require 'init-markdown)
+(require 'init-multiple-cursors)
 (require 'init-projectile)
 (require 'init-selectrum)
 (require 'init-theme)
+(require 'init-which-key)
 (require 'init-yaml)
 
 (provide 'init)

@@ -5,3 +5,4 @@ elpa/
 straight/
 transient/
 projectile-bookmarks.eld
+.mc-lists.el
