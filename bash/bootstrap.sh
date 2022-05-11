@@ -16,7 +16,7 @@ echo "- Compatibility: MacOS only"
 echo "- Shell: Bash"
 echo "- Terminal Multiplexing: Tmux"
 echo "- Terminal: iTerm2"
-echo "- Text Editor: Emacs (gccemacs from emacs-plus, no gui)"
+echo "- Text Editor: Emacs (gccemacs/native-comp patch on emacs-plus, no gui)"
 echo
 echo "Also included:"
 echo "- Github CLI (gh)"
@@ -75,7 +75,8 @@ brew tap homebrew/cask-fonts &>/dev/null
 brew install --cask font-jetbrains-mono &>/dev/null
 
 # other packages
-brew install coreutils
+brew install --cask iterm2 &>/dev/null
+brew install coreutils &>/dev/null
 brew install fd &>/dev/null
 brew install gh &>/dev/null
 brew install ripgrep &>/dev/null
@@ -101,5 +102,6 @@ fi
 brew --version >/dev/null
 emacs --version >/dev/null
 brew list | grep emacs-plus >/dev/null
+brew list | grep iterm2 >/dev/null
 tmux -V >/dev/null
 gh --version >/dev/null
