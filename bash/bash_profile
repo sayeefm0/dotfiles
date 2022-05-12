@@ -29,6 +29,7 @@ alias tmrc="e ${CONFIG_DIR}/tmux/tmux.conf"
 
 ## gnu utilities
 alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
+alias cls="clear && ls"
 
 ## git
 alias gd="git diff"

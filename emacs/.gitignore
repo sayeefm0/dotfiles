@@ -6,3 +6,4 @@ straight/
 transient/
 projectile-bookmarks.eld
 .mc-lists.el
+.lsp-session-v1

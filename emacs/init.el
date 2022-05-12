@@ -47,6 +47,8 @@
 (require 'init-which-key)
 (require 'init-yaml)
 
+(require 'init-go-lang)
+
 (provide 'init)
 
 ;;; init.el ends here

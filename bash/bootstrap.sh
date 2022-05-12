@@ -74,6 +74,9 @@ git clone https://github.com/tmux-plugins/tpm ~/"$DOTFILES_DIR"/tmux/plugins/tpm
 brew tap homebrew/cask-fonts &>/dev/null
 brew install --cask font-jetbrains-mono &>/dev/null
 
+# langs
+brew install go
+
 # other packages
 brew install --cask iterm2 &>/dev/null
 brew install coreutils &>/dev/null
