@@ -1,8 +1,12 @@
-;;; init-which-key --- install and configure which-key mode
+;;; init-which-key.el --- which-key shows completions for in-progress keystrokes
 ;;; Commentary:
+;;; Code:
 
-(straight-use-package 'which-key)
-
-(which-key-mode)
+(use-package which-key
+  :straight t
+  :config
+  (which-key-mode))
 
 (provide 'init-which-key)
+
+;;; init-which-key.el ends here

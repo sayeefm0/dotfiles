@@ -1,10 +1,13 @@
-;;; init-theme --- configure appearance
+;;; init-theme.el --- configure appearance
 ;;; Commentary:
-;; All appearance related configuration should go here
+;;; Code:
 
-(straight-use-package 'nord-theme)
-
-(setq nord-region-highlight 'frost)
-(load-theme 'nord t)
+(use-package nord-theme
+  :straight t
+  :config
+  (setq nord-region-highlight 'frost)
+  (load-theme 'nord t))
 
 (provide 'init-theme)
+
+;;; init-theme.el ends here

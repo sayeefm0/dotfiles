@@ -1,7 +1,11 @@
 ;;; init-yaml.el --- yaml lang configuration
 ;;; Commentary:
 ;; YAML configuration - this may span multiple packages
+;;; Code:
 
-(straight-use-package 'yaml-mode)
+(use-package yaml-mode
+  :straight t)
 
 (provide 'init-yaml)
+
+;;; init-yaml.el ends here

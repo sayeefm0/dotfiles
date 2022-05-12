@@ -1,4 +1,8 @@
 ;;; init-straight.el --- initialize straight package manager
+;;; Commentary:
+;; Install straight.el if it is not available.
+;; This should be loaded prior to any other configuration dependent on straight.
+;;; Code:
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -14,3 +18,5 @@
   (load bootstrap-file nil 'nomessage))
 
 (provide 'init-straight)
+
+;;; init-straight.el ends here

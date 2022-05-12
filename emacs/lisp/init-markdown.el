@@ -1,7 +1,10 @@
-;;; init-markdown --- configure .md editing
-;;; Commentary
-;; This file may coordinate multiple packages to support markdown
+;;; init-markdown.el --- configure .md editing
+;;; Commentary:
+;;; Code:
 
-(straight-use-package 'markdown-mode)
+(use-package markdown-mode
+  :straight t)
 
 (provide 'init-markdown)
+
+;;; init-markdown.el ends here

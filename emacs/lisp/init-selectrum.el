@@ -1,12 +1,24 @@
-;;; init-selectrum.el --- install and configure selectrum
+;;; init-selectrum.el --- selectrum incremental narrowing
 ;;; Commentary:
-;; Selectrum is an incremental narrowing framework a-la helm, ivy, etc.
+;;; Code:
 
-(straight-use-package 'prescient)
-(straight-use-package 'selectrum)
-(straight-use-package 'selectrum-prescient)
+(use-package prescient
+  :straight t)
 
-(selectrum-mode +1)
-(selectrum-prescient-mode +1)
+(use-package selectrum
+  :straight t
+  :config
+  (selectrum-mode +1))
+
+(use-package selectrum-prescient
+  :after (prescient selectrum)
+  :straight t
+  :config
+  (selectrum-prescient-mode +1))
+
+;(selectrum-mode +1)
+;(selectrum-prescient-mode +1)
 
 (provide 'init-selectrum)
+
+;;; init-selectrum.el ends here

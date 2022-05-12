@@ -1,9 +1,12 @@
-;;; init-projectile --- install and configure projectile
+;;; init-projectile.el --- projectile configuration
 ;;; Commentary:
 ;; Projectile provides "smart" project file searching, grepping, replace, etc.
+;;; Code:
 
-(straight-use-package 'projectile)
-
-(global-set-key (kbd "C-c p f") 'projectile-find-file)
+(use-package projectile
+  :straight t
+  :bind ("C-c C-p C-f" . projectile-find-file))
 
 (provide 'init-projectile)
+
+;;; init-projectile.el ends here

@@ -1,9 +1,12 @@
-;;; init-magit --- install and configure magit
+;;; init-magit --- git porcelain
 ;;; Commentary:
-;; Magit provides a friendly git-porcelain
+;;; Code:
 
-(straight-use-package 'magit)
-
-(setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+(use-package magit
+  :straight t
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 (provide 'init-magit)
+
+;;; init-magit.el ends here
