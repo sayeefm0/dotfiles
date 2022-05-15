@@ -75,7 +75,10 @@ brew tap homebrew/cask-fonts &>/dev/null
 brew install --cask font-jetbrains-mono &>/dev/null
 
 # langs
-brew install go
+
+if ! go version &>/dev/null; then
+    brew install go
+fi
 
 # other packages
 brew install --cask iterm2 &>/dev/null
