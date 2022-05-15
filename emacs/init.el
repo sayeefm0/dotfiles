@@ -45,6 +45,7 @@
 (require 'init-selectrum)
 (require 'init-theme)
 (require 'init-which-key)
+(require 'init-winner)
 (require 'init-yaml)
 
 (require 'init-go-lang)
