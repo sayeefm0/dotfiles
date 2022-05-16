@@ -43,6 +43,7 @@
 (require 'init-markdown)
 (require 'init-projectile)
 (require 'init-selectrum)
+(require 'init-sunrise)
 (require 'init-theme)
 (require 'init-which-key)
 (require 'init-winner)
