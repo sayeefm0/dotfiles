@@ -1,95 +1,105 @@
+# Order of appearance:
+# 1. INFORMATION
+# 2. UTILITY FUNCTIONS (used in this script)
+# 3. SHELL
+# 4. PACKAGE MANAGEMENT
+# 5. SYMLINK DOTFILES
+# 6. VALIDATION (basic cmd checking)
+#
+#
 # TODO
 # - run as sudo to avoid password prompting
 # - re-use some environment variable for the dotfiles dir?
+
 set -e
 DOTFILES_DIR=~/dotfiles
 
-# --------------------------------
-# information
-# --------------------------------
+# //////////////////////////////
+# INFORMATION
+# //////////////////////////////
 
 echo
 echo "This script will setup the development environment found in github.com/bbflower/dotfiles"
 echo
-echo "Environment Summary:"
-echo "- Compatibility: MacOS only"
+echo "Environment summary:"
+echo "- Compatibility: MacOS"
 echo "- Shell: Bash"
 echo "- Terminal Multiplexing: Tmux"
 echo "- Terminal: iTerm2"
 echo "- Text Editor: Emacs (gccemacs/native-comp patch on emacs-plus, no gui)"
 echo
+echo "Language support:"
+echo "- Go"
+echo
 echo "Also included:"
 echo "- Github CLI (gh)"
 echo "- Jetbrains Mono font"
 echo
-echo "See github.com/bbflower/dotfiles/bash/bootstrap.sh to see exactly what's happening"
-echo
 
-# --------------------------------
-# utility functions
-# --------------------------------
+# //////////////////////////////
+# UTILITY FUNCTIONS
+# //////////////////////////////
 
 isSudo() {
     sudo -nv &>/dev/null
     echo $?
 }
 
-# --------------------------------
-# shell
-# --------------------------------
+# //////////////////////////////
+# SHELL
+# //////////////////////////////
 
 if [ "$SHELL" != "/bin/bash" ] && [ -f /bin/bash ] && [ $(isSudo) -eq 0 ]; then
     chsh -s /bin/bash
 fi
 
-# --------------------------------
-# package management - homebrew
-# --------------------------------
+# //////////////////////////////
+# PACKAGE MANAGEMENT - HOMEBREW
+# //////////////////////////////
 
-# make sure homebrew is installed
+##  make sure homebrew is installed
 if ! command -v brew &>/dev/null; then
     echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &>/dev/null
 fi
 
-# emacs
+## EMACS (-PLUS) ---------------
+
 brew tap d12frosted/emacs-plus &>/dev/null
 if ! command -v gcc &>/dev/null; then # need an updated gcc and libgccjit for emacs-plus
     brew install libgccjit &>/dev/null
 else
     brew reinstall libgccjit &>/dev/null
 fi
-if ! brew list | grep libgccjit &>/dev/null; then
-    brew install libgccjit &>/dev/null
-else
-    brew reinstall libgccjit &>/dev/null
-fi
 brew install emacs-plus@28 --with-native-comp --without-cocoa &>/dev/null
 
-# tmux
-brew install tmux &>/dev/null
-# TODO: handle dynamic paths here
-git clone https://github.com/tmux-plugins/tpm ~/"$DOTFILES_DIR"/tmux/plugins/tpm  &>/dev/null
+## TMUX ------------------------
+## and tmux plugin manager -----
 
-# fonts
+brew install tmux &>/dev/null
+git clone https://github.com/tmux-plugins/tpm ~/"$DOTFILES_DIR"/tmux/plugins/tpm  &>/dev/null 
+
+## FONTS -----------------------
+
 brew tap homebrew/cask-fonts &>/dev/null
 brew install --cask font-jetbrains-mono &>/dev/null
 
-# langs
+## LANGS -----------------------
 
 if ! go version &>/dev/null; then
     brew install go
 fi
 
-# other packages
+## EVERYTHING ELSE -------------
+
 brew install --cask iterm2 &>/dev/null
 brew install coreutils &>/dev/null
 brew install fd &>/dev/null
 brew install gh &>/dev/null
 brew install ripgrep &>/dev/null
 
-# --------------------------------
-# symlinking dotfiles
-# --------------------------------
+# //////////////////////////////
+# SYMLINK DOTFILES
+# //////////////////////////////
 
 if ! [ -f ~/.bash_profile ]; then
     ln -s ~/"$DOTFILES_DIR"/bash/bash_profile ~/.bash_profile
@@ -101,9 +111,9 @@ if ! [ -f ~/.emacs.d ]; then
     ln -s ~/"$DOTFILES_DIR"/emacs ~/.emacs.d
 fi
 
-# --------------------------------
-# validation
-# --------------------------------
+# //////////////////////////////
+# VALIDATION
+# //////////////////////////////
 
 brew --version >/dev/null
 emacs --version >/dev/null

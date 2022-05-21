@@ -1,39 +1,78 @@
-# -*-Shell-script-*- -> emacs file-local-variable
+# -*-Shell-script-*- this tells emacs to treat this as a shell script
+# 
+# Order of appearance:
+# 1. ENVIRONMENT VARIABLES
+# 2. ALIASES
+# 3. STARTUP
 
-# path
+# //////////////////////////////
+# ENVIRONMENT VARIABLES
+# //////////////////////////////
+
+# PATH & MANPATH ---------------
+
 PATH="${PATH}:/opt/homebrew/bin"
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
-# prompt
+## PROMPT ----------------------
+
 pretty_git_branch() {
     git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
 }
 PS1="\W\$(pretty_git_branch) $ "
 
-# other environment variables
-export BASH_SILENCE_DEPRECATION_WARNING=1 # apple doesn't want us to use bash
+## EVERYTHING ELSE -------------
+
+export BASH_SILENCE_DEPRECATION_WARNING=1 # apple bash deprecation warning
 CONFIG_DIR="~/dotfiles/"
-EDITOR="emacs"
+EDITOR="emacsclient -t"
+VISUAL="emacsclient -t"
 HISTFILE=~/"$CONFIG_DIR"/bash/bash_history
 
-# aliases
+# //////////////////////////////
+# ALIASES
+# //////////////////////////////
 
-## common
-alias e="emacs"
+alias e="${EDITOR}"
+alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
+alias cls="clear && ls"
+
+## DOTFILES --------------------
+
 alias erc="e ${CONFIG_DIR}/emacs/init.el"
 alias shbs="e ${CONFIG_DIR}/bash/bootstrap.sh"
 alias shrc="e ${CONFIG_DIR}/bash/bash_profile"
 alias src="source ${CONFIG_DIR}/bash/bash_profile"
 alias tmrc="e ${CONFIG_DIR}/tmux/tmux.conf"
 
-## gnu utilities
-alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
-alias cls="clear && ls"
+## GIT -------------------------
+## sparse in favor of magit ----
 
-## git
 alias gd="git diff"
 alias gs="git status"
 
-## tmux
+## TMUX ------------------------
+
 alias tma="tmux attach"
+alias tmk="tmux kill-server"
+
+# //////////////////////////////
+# STARTUP
+# //////////////////////////////
+
+## CREATE / ATTACH TMUX SESSION-
+
+if ! [ -n "$TMUX" ]; then
+    if ! tma &>/dev/null; then
+        tmux new -s "main"
+    fi
+fi
+
+## START EMACS -----------------
+
+if ! emacsclient -a false -e 't' &>/dev/null; then
+    echo -n "starting emacs server..."
+    emacs --daemon &>/dev/null
+    echo " success."
+fi
