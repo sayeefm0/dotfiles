@@ -57,7 +57,3 @@ There are additional steps that haven't been automated yet. Most of these are co
   - Show recent applications in Dock: disable
 - Remap caps lock to ctrl: `System Preferences -> Keyboard -> Modifier Keys`
 - Enable tap to click - `System Preferences -> Trackpad -> Tap to click`
-
-## Credits
-
-- Photo from [unsplash](https://unsplash.com/photos/4NnBYiTZKSE)

@@ -6,8 +6,8 @@
 (use-package avy
   :straight t
   :bind (:map vim-like
-              ("C-l" . avy-goto-line)
-              ("C-s" . avy-goto-char)))
+              ("l" . avy-goto-line)
+              ("s" . avy-goto-char)))
 
 (provide 'init-avy)
 
