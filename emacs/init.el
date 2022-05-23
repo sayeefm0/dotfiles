@@ -14,7 +14,9 @@
 (setq-default indent-tabs-mode nil
               tab-width 2)
 (setq backup-directory-alist `(("." . "~/dotfiles/emacs/backup"))
-      tab-always-indent 'complete)    ; if already indented, complete thing at point
+      tab-always-indent 'complete ; if already indented, complete thing at point
+      gc-cons-threshold 100000000
+      read-process-output-max (* 1024 1024))
 
 ;; default modes - hl-line-mode is at the end because something is overriding it
 
@@ -57,9 +59,12 @@
 (require 'init-selectrum)
 (require 'init-sunrise)
 (require 'init-theme)
+(require 'init-tree-sitter)
 (require 'init-which-key)
 (require 'init-yaml)
 
+(require 'init-lsp-mode)
+(require 'init-bash)
 (require 'init-go-lang)
 
 (global-hl-line-mode 1)    ; TODO: figure out what's overriding this

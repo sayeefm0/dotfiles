@@ -1,4 +1,5 @@
 # -*-Shell-script-*- this tells emacs to treat this as a shell script
+# shellcheck shell=bash
 # 
 # Order of appearance:
 # 1. ENVIRONMENT VARIABLES
@@ -13,6 +14,7 @@
 
 PATH="${PATH}:/opt/homebrew/bin"
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+PATH="${PATH}:~/go/bin"
 MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 ## PROMPT ----------------------
@@ -25,6 +27,8 @@ PS1="\W\$(pretty_git_branch) $ "
 ## EVERYTHING ELSE -------------
 
 export BASH_SILENCE_DEPRECATION_WARNING=1 # apple bash deprecation warning
+export LSP_USE_PLISTS=true # improve perf of emacs lsp-mode
+export NVM_DIR="$HOME/.nvm"
 CONFIG_DIR="~/dotfiles/"
 EDITOR="emacsclient -t"
 VISUAL="emacsclient -t"
@@ -61,18 +65,7 @@ alias tmk="tmux kill-server"
 # STARTUP
 # //////////////////////////////
 
-## CREATE / ATTACH TMUX SESSION-
+## NPM
 
-if ! [ -n "$TMUX" ]; then
-    if ! tma &>/dev/null; then
-        tmux new -s "main"
-    fi
-fi
-
-## START EMACS -----------------
-
-if ! emacsclient -a false -e 't' &>/dev/null; then
-    echo -n "starting emacs server..."
-    emacs --daemon &>/dev/null
-    echo " success."
-fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

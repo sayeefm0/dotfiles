@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Order of appearance:
 # 1. INFORMATION
 # 2. UTILITY FUNCTIONS (used in this script)
@@ -54,12 +55,18 @@ if [ "$SHELL" != "/bin/bash" ] && [ -f /bin/bash ] && [ $(isSudo) -eq 0 ]; then
 fi
 
 # //////////////////////////////
-# PACKAGE MANAGEMENT - HOMEBREW
+# PACKAGE MANAGEMENT
 # //////////////////////////////
 
 ##  make sure homebrew is installed
 if ! command -v brew &>/dev/null; then
     echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &>/dev/null
+fi
+
+## make sure npm is installed
+## TODO: install bash ls npm i -g bash-language-server
+if ! nvm --version &>/dev/null; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 fi
 
 ## EMACS (-PLUS) ---------------
@@ -86,7 +93,14 @@ brew install --cask font-jetbrains-mono &>/dev/null
 ## LANGS -----------------------
 
 if ! go version &>/dev/null; then
-    brew install go
+    brew install go &>/dev/null
+fi
+if ! gopls version &>/dev/null; then
+    go install golang.org/x/tools/gopls@latest
+fi
+
+if ! shellcheck --version &>/dev/null; then
+    brew install shellcheck &>/dev/null
 fi
 
 ## EVERYTHING ELSE -------------
