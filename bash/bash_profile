@@ -14,7 +14,7 @@
 
 PATH="${PATH}:/opt/homebrew/bin"
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
-PATH="${PATH}:~/go/bin"
+PATH="${PATH}:${HOME}/go/bin"
 MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 ## PROMPT ----------------------
@@ -22,33 +22,35 @@ MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 pretty_git_branch() {
     git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
 }
-PS1="\W\$(pretty_git_branch) $ "
+PS1='\[\e[40m\]\e[01;32m\]\W\[\e[34m\]$(pretty_git_branch) $\[\e[m\] '
 
 ## EVERYTHING ELSE -------------
 
 export BASH_SILENCE_DEPRECATION_WARNING=1 # apple bash deprecation warning
 export LSP_USE_PLISTS=true # improve perf of emacs lsp-mode
-export NVM_DIR="$HOME/.nvm"
-CONFIG_DIR="~/dotfiles/"
+export NVM_DIR="${HOME}/.nvm"
+CONFIG_DIR="${HOME}/dotfiles/"
 EDITOR="emacsclient -t"
+# shellcheck disable=SC2034
 VISUAL="emacsclient -t"
-HISTFILE=~/"$CONFIG_DIR"/bash/bash_history
+HISTFILE=~/"${CONFIG_DIR}"/bash/bash_history
 
 # //////////////////////////////
 # ALIASES
 # //////////////////////////////
 
-alias e="${EDITOR}"
+alias e='${EDITOR}'
 alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
 alias cls="clear && ls"
 
 ## DOTFILES --------------------
 
-alias erc="e ${CONFIG_DIR}/emacs/init.el"
-alias shbs="e ${CONFIG_DIR}/bash/bootstrap.sh"
-alias shrc="e ${CONFIG_DIR}/bash/bash_profile"
-alias src="source ${CONFIG_DIR}/bash/bash_profile"
-alias tmrc="e ${CONFIG_DIR}/tmux/tmux.conf"
+alias erc='e ${CONFIG_DIR}/emacs/init.el'
+alias shbs='e ${CONFIG_DIR}/bash/bootstrap.sh'
+alias shrc='e ${CONFIG_DIR}/bash/bash_profile'
+alias src='source ${CONFIG_DIR}/bash/bash_profile'
+alias tmrc='e ${CONFIG_DIR}/tmux/tmux.conf'
+alias cddot='cd ${CONFIG_DIR}'
 
 ## GIT -------------------------
 ## sparse in favor of magit ----

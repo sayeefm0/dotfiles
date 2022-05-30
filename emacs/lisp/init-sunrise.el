@@ -4,7 +4,7 @@
 
 (use-package sunrise-commander
     :straight t
-    :bind ("C-c C-s" . sunrise-cd))
+    :bind ("C-c ;" . sunrise-cd))
 
 (provide 'init-sunrise)
 

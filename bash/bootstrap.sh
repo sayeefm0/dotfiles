@@ -65,6 +65,7 @@ fi
 
 ## make sure npm is installed
 ## TODO: install bash ls npm i -g bash-language-server
+## TODO: install html ls npm install -g vscode-html-languageserver-bin
 if ! nvm --version &>/dev/null; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 fi
@@ -106,6 +107,7 @@ fi
 ## EVERYTHING ELSE -------------
 
 brew install --cask iterm2 &>/dev/null
+brew install hugo
 brew install coreutils &>/dev/null
 brew install fd &>/dev/null
 brew install gh &>/dev/null

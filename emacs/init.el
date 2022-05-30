@@ -23,7 +23,8 @@
 (global-display-line-numbers-mode 1)
 (menu-bar-mode -1)
 (winner-mode 1)
-
+(add-hook 'conf-toml-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
+(add-hook 'markdown-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
 
 ;; keymap for vim-like movements
 
@@ -42,6 +43,7 @@
 
 (global-set-key (kbd "C-c C-w u") 'winner-undo)
 (global-set-key (kbd "C-c C-w r") 'winner-redo)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;  package configurations
 
@@ -66,6 +68,7 @@
 (require 'init-lsp-mode)
 (require 'init-bash)
 (require 'init-go-lang)
+(require 'init-html)
 
 (global-hl-line-mode 1)    ; TODO: figure out what's overriding this
 
