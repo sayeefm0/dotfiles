@@ -68,7 +68,6 @@
 (require 'init-lsp-mode)
 (require 'init-bash)
 (require 'init-go-lang)
-(require 'init-html)
 
 (global-hl-line-mode 1)    ; TODO: figure out what's overriding this
 
