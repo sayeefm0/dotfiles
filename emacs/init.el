@@ -23,6 +23,7 @@
 (global-display-line-numbers-mode 1)
 (menu-bar-mode -1)
 (winner-mode 1)
+(electric-pair-mode 1)
 (add-hook 'conf-toml-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
 (add-hook 'markdown-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
 
