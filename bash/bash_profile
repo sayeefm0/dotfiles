@@ -12,9 +12,10 @@
 
 # PATH & MANPATH ---------------
 
+export GOPATH=$(go env GOPATH)
 PATH="${PATH}:/opt/homebrew/bin"
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
-PATH="${PATH}:${HOME}/go/bin"
+PATH="${PATH}:${GOPATH}"
 MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 ## PROMPT ----------------------
@@ -35,7 +36,7 @@ EDITOR="emacsclient -t"
 VISUAL="emacsclient -t"
 HISTFILE=~/"${CONFIG_DIR}"/bash/bash_history
 
-# //////////////////////////////
+
 # ALIASES
 # //////////////////////////////
 
@@ -52,6 +53,10 @@ alias src='source ${CONFIG_DIR}/bash/bash_profile'
 alias tmrc='e ${CONFIG_DIR}/tmux/tmux.conf'
 alias cddot='cd ${CONFIG_DIR}'
 
+## EMACS -----------------------
+
+alias lspclear='test -f ${CONFIG_DIR}/emacs/.lsp-session-v1 && rm ${CONFIG_DIR}/emacs/.lsp-session-v1'
+
 ## GIT -------------------------
 ## sparse in favor of magit ----
 
@@ -62,6 +67,16 @@ alias gs="git status"
 
 alias tma="tmux attach"
 alias tmk="tmux kill-server"
+
+## MISC ------------------------
+
+envstat() {
+    echo -n "emacs server: "
+    pgrep -fiq 'emacs --daemon' && echo "X"
+
+    echo -n "tmux session: "
+    pgrep -ilq 'tmux' && echo "X"
+}
 
 # //////////////////////////////
 # STARTUP

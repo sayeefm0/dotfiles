@@ -9,18 +9,16 @@
   :init
   (setq lsp-keymap-prefix "C-c C-o")
   :config
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (lsp-register-custom-settings
+   '(("gopls.completeUnimported" t t))))
 
 (use-package lsp-ui
   :straight t
   :after lsp-mode
   :bind
   (:map lsp-ui-mode-map
-        ("C-c C-l d" . lsp-ui-doc-glance))
-  :config
-  (setq lsp-ui-sideline-show-diagnostics t
-        lsp-ui-sideline-show-code-actions t
-        lsp-ui-sideline-delay 0.5))
+        ("C-c C-l d" . lsp-ui-doc-glance)))
 
 (provide 'init-lsp-mode)
 

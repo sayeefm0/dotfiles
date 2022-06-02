@@ -99,6 +99,11 @@ fi
 if ! gopls version &>/dev/null; then
     go install golang.org/x/tools/gopls@latest
 fi
+# TODO: handle these correctly
+# go install github.com/stamblerre/gocode@latest
+# go install golang.org/x/tools/cmd/godoc@latest
+# go install golang.org/x/tools/cmd/goimports@latest
+
 
 if ! shellcheck --version &>/dev/null; then
     brew install shellcheck &>/dev/null
