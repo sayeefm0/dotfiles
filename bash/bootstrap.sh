@@ -1,144 +1,121 @@
-# shellcheck shell=bash
-# Order of appearance:
-# 1. INFORMATION
-# 2. UTILITY FUNCTIONS (used in this script)
-# 3. SHELL
-# 4. PACKAGE MANAGEMENT
-# 5. SYMLINK DOTFILES
-# 6. VALIDATION (basic cmd checking)
-#
-#
-# TODO
-# - run as sudo to avoid password prompting
-# - re-use some environment variable for the dotfiles dir?
+#!/bin/bash
 
 set -e
-DOTFILES_DIR=~/dotfiles
+DOTFILES_DIR="${1:-$HOME/dotfiles}"
 
-# //////////////////////////////
-# INFORMATION
-# //////////////////////////////
+# main function used to keep driving code near start of file
+# call to main near end of file, followed by basic validation
+main() {
+    set_default_shell /bin/bash
+    install_homebrew
+    install_nvm
 
-echo
-echo "This script will setup the development environment found in github.com/bbflower/dotfiles"
-echo
-echo "Environment summary:"
-echo "- Compatibility: MacOS"
-echo "- Shell: Bash"
-echo "- Terminal Multiplexing: Tmux"
-echo "- Terminal: iTerm2"
-echo "- Text Editor: Emacs (gccemacs/native-comp patch on emacs-plus, no gui)"
-echo
-echo "Language support:"
-echo "- Go"
-echo
-echo "Also included:"
-echo "- Github CLI (gh)"
-echo "- Jetbrains Mono font"
-echo
+    install_cli_utils
+    install_emacs
+    install_tmux    
+    install_iterm
+    install_fonts    
+    
+    setup_go_env
+    setup_bash_env
 
-# //////////////////////////////
-# UTILITY FUNCTIONS
-# //////////////////////////////
-
-isSudo() {
-    sudo -nv &>/dev/null
-    echo $?
+    symlink_dotfiles
 }
 
-# //////////////////////////////
-# SHELL
-# //////////////////////////////
+validate() {
+    # validate package managers
+    command -v brew
+    command -v nvm
+    # validate cli
+    command -v fd
+    command -v gh
+    command -v rg
+    command -v emacs
+    command -v tmux
+    # validate lang support
+    command -v go
+    command -v gopls
+    command -v bash-language-server
+    command -v shellcheck
+}
 
-if [ "$SHELL" != "/bin/bash" ] && [ -f /bin/bash ] && [ $(isSudo) -eq 0 ]; then
-    chsh -s /bin/bash
-fi
+# utility functions
 
-# //////////////////////////////
-# PACKAGE MANAGEMENT
-# //////////////////////////////
+set_default_shell() {
+    if [ "$UID" -eq 0 ] && [ "$SHELL" != "$1" ] && [ -f "$1" ]; then
+        sudo -n chsh -s "$1"
+    fi    
+}
 
-##  make sure homebrew is installed
-if ! command -v brew &>/dev/null; then
-    echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &>/dev/null
-fi
+install_homebrew() {
+    if ! command -v brew &>/dev/null; then
+        echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/opt/homebrew/bin/brew shellenv)" # get brew on PATH
+    fi    
+}
 
-## make sure npm is installed
-## TODO: install bash ls npm i -g bash-language-server
-## TODO: install html ls npm install -g vscode-html-languageserver-bin
-if ! nvm --version &>/dev/null; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-fi
+install_nvm() {
+    if ! command -v nvm &>/dev/null; then
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+        [ -s "$HOME/.nvm/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # load nvm
+    fi    
+}
 
-## EMACS (-PLUS) ---------------
+install_cli_utils() {
+    brew install coreutils fd gh ripgrep
+}
 
-brew tap d12frosted/emacs-plus &>/dev/null
-if ! command -v gcc &>/dev/null; then # need an updated gcc and libgccjit for emacs-plus
-    brew install libgccjit &>/dev/null
-else
-    brew reinstall libgccjit &>/dev/null
-fi
-brew install emacs-plus@28 --with-native-comp --without-cocoa &>/dev/null
+install_fonts() {
+    brew tap homebrew/cask-fonts
+    brew install --cask font-jetbrains-mono    
+}
 
-## TMUX ------------------------
-## and tmux plugin manager -----
+install_iterm() {
+    brew install --cask iterm2
+}
 
-brew install tmux &>/dev/null
-git clone https://github.com/tmux-plugins/tpm ~/"$DOTFILES_DIR"/tmux/plugins/tpm  &>/dev/null 
+install_emacs() {
+    brew tap d12frosted/emacs-plus
+    brew install libgccjit
+    brew install emacs-plus@28 --with-native-comp --without-cocoa    
+}
 
-## FONTS -----------------------
+install_tmux() {
+    brew install tmux
+    if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi    
+}
 
-brew tap homebrew/cask-fonts &>/dev/null
-brew install --cask font-jetbrains-mono &>/dev/null
-
-## LANGS -----------------------
-
-if ! go version &>/dev/null; then
-    brew install go &>/dev/null
-fi
-if ! gopls version &>/dev/null; then
+setup_go_env() {
+    brew install go
     go install golang.org/x/tools/gopls@latest
-fi
-# TODO: handle these correctly
-# go install github.com/stamblerre/gocode@latest
-# go install golang.org/x/tools/cmd/godoc@latest
-# go install golang.org/x/tools/cmd/goimports@latest
+}
 
+setup_bash_env() {
+    npm install bash-language-server
+    brew install shellcheck    
+}
 
-if ! shellcheck --version &>/dev/null; then
-    brew install shellcheck &>/dev/null
-fi
+symlink_dotfiles() {
+    if ! [ -f "$HOME/.bash_profile" ]; then
+        ln -s "$DOTFILES_DIR/bash/bash_profile" "$HOME/.bash_profile"
+    fi
+    if ! [ -f "$HOME/.tmux.conf" ]; then
+        ln -s "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+    fi
+    if [ -d "$HOME/.emacs.d" ]; then
+        if ! [ -f "$HOME/.emacs.d/early-init.el" ]; then
+            ln -s "$DOTFILES_DIR/emacs/early-init.el" "$HOME/.emacs.d/early-init.el"
+        fi
+        if ! [ -f "$HOME/.emacs.d/init.el" ]; then
+            ln -s "$DOTFILES_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
+        fi
+        if ! [ -d "$HOME/.emacs.d/lisp" ]; then
+            ln -s "$DOTFILES_DIR/emacs/lisp" "$HOME/.emacs.d/lisp"
+        fi
+    fi
+}
 
-## EVERYTHING ELSE -------------
-
-brew install --cask iterm2 &>/dev/null
-brew install hugo
-brew install coreutils &>/dev/null
-brew install fd &>/dev/null
-brew install gh &>/dev/null
-brew install ripgrep &>/dev/null
-
-# //////////////////////////////
-# SYMLINK DOTFILES
-# //////////////////////////////
-
-if ! [ -f ~/.bash_profile ]; then
-    ln -s ~/"$DOTFILES_DIR"/bash/bash_profile ~/.bash_profile
-fi
-if ! [ -f ~/.tmux.conf ]; then
-    ln -s ~/"$DOTFILES_DIR"/tmux/tmux.conf ~/.tmux.conf
-fi
-if ! [ -f ~/.emacs.d ]; then
-    ln -s ~/"$DOTFILES_DIR"/emacs ~/.emacs.d
-fi
-
-# //////////////////////////////
-# VALIDATION
-# //////////////////////////////
-
-brew --version >/dev/null
-emacs --version >/dev/null
-brew list | grep emacs-plus >/dev/null
-brew list | grep iterm2 >/dev/null
-tmux -V >/dev/null
-gh --version >/dev/null
+main "$@"
+validate

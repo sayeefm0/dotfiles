@@ -1,88 +1,71 @@
-# -*-Shell-script-*- this tells emacs to treat this as a shell script
 # shellcheck shell=bash
-# 
-# Order of appearance:
-# 1. ENVIRONMENT VARIABLES
-# 2. ALIASES
-# 3. STARTUP
+CONFIG_DIR="$HOME/dotfiles"
 
-# //////////////////////////////
-# ENVIRONMENT VARIABLES
-# //////////////////////////////
+# :: environment variables
 
-# PATH & MANPATH ---------------
+__prompt() {
+    local prevexit="$?"
+    local blackbg="\[\e[40m\]"
+    local redfg="\[\e[31m\]"
+    local bluefg="\[\e[34m\]"
+    local greenfg="\[\e[1;32m\]"
+    local endcolor="\[\e[0m\]"
+
+    PS1="$blackbg"
+    # diff color if the previous command failed
+    if [ $prevexit -ne 0 ]; then
+        PS1+="$redfg[$prevexit]\W/"
+    else
+        PS1+="$bluefg\W/"
+    fi
+    # show git branch
+    if git rev-parse --git-dir &>/dev/null; then
+        PS1+=" $greenfg::$(git branch --show-current):: "
+    fi
+    PS1+="$ $endcolor "
+}
+PROMPT_COMMAND=__prompt
+
+export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -t"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 export GOPATH=$(go env GOPATH)
-PATH="${PATH}:/opt/homebrew/bin"
-PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
-PATH="${PATH}:${GOPATH}"
-MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
+export PATH="$PATH:$GOPATH/bin"
 
-## PROMPT ----------------------
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-pretty_git_branch() {
-    git branch --show-current 2>/dev/null | sed -e 's/\(.*\)/ (\1)/'
-}
-PS1='\[\e[40m\]\e[01;32m\]\W\[\e[34m\]$(pretty_git_branch) $\[\e[m\] '
+export LSP_USE_PLISTS=true # improve lsp-mode perf
+export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
-## EVERYTHING ELSE -------------
+# :: aliases
 
-export BASH_SILENCE_DEPRECATION_WARNING=1 # apple bash deprecation warning
-export LSP_USE_PLISTS=true # improve perf of emacs lsp-mode
-export NVM_DIR="${HOME}/.nvm"
-CONFIG_DIR="${HOME}/dotfiles/"
-EDITOR="emacsclient -t"
-# shellcheck disable=SC2034
-VISUAL="emacsclient -t"
-HISTFILE=~/"${CONFIG_DIR}"/bash/bash_history
-
-
-# ALIASES
-# //////////////////////////////
-
+alias cd="pushd"
+alias cdl="dirs -v"
+alias cdr="dirs -c"
 alias e='${EDITOR}'
-alias ls="ls -lA --color=always --group-directories-first -IPublic -IPictures -IMusic -IMovies -ILibrary -IDownloads -IDocuments -IDesktop -I.DS_Store -I.CFUserTextEncoding -I.Trash"
-alias cls="clear && ls"
+alias ls="ls --color=always"
+alias src="source ~/.bash_profile"
 
-## DOTFILES --------------------
+alias erc="e $CONFIG_DIR/emacs/init.el"
+alias shrc="e $CONFIG_DIR/bash/bash_profile"
+alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
+alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
 
-alias erc='e ${CONFIG_DIR}/emacs/init.el'
-alias shbs='e ${CONFIG_DIR}/bash/bootstrap.sh'
-alias shrc='e ${CONFIG_DIR}/bash/bash_profile'
-alias src='source ${CONFIG_DIR}/bash/bash_profile'
-alias tmrc='e ${CONFIG_DIR}/tmux/tmux.conf'
-alias cddot='cd ${CONFIG_DIR}'
-
-## EMACS -----------------------
-
-alias lspclear='test -f ${CONFIG_DIR}/emacs/.lsp-session-v1 && rm ${CONFIG_DIR}/emacs/.lsp-session-v1'
-
-## GIT -------------------------
-## sparse in favor of magit ----
-
+alias gb="git branch"
+alias gbc="git checkout -b"
+alias gc="git checkout"
 alias gd="git diff"
+alias gm="git merge"
+alias gp="git pull --ff-only"
 alias gs="git status"
 
-## TMUX ------------------------
-
 alias tma="tmux attach"
-alias tmk="tmux kill-server"
-
-## MISC ------------------------
-
-envstat() {
-    echo -n "emacs server: "
-    pgrep -fiq 'emacs --daemon' && echo "X"
-
-    echo -n "tmux session: "
-    pgrep -ilq 'tmux' && echo "X"
-}
-
-# //////////////////////////////
-# STARTUP
-# //////////////////////////////
-
-## NPM
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias tml="tmux ls"
+alias tmsc="tmux new -s main"
+alias tmsk="tmux kill-server"

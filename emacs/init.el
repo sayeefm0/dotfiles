@@ -13,8 +13,7 @@
 
 (setq-default indent-tabs-mode nil
               tab-width 2)
-(setq backup-directory-alist `(("." . "~/dotfiles/emacs/backup"))
-      tab-always-indent 'complete ; if already indented, complete thing at point
+(setq tab-always-indent 'complete ; if already indented, complete thing at point
       gc-cons-threshold 100000000
       read-process-output-max (* 1024 1024))
 
@@ -24,6 +23,8 @@
 (menu-bar-mode -1)
 (winner-mode 1)
 (electric-pair-mode 1)
+(setq fill-column 80)
+(global-display-fill-column-indicator-mode 1)
 (add-hook 'conf-toml-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
 (add-hook 'markdown-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
 
