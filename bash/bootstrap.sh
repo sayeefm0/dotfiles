@@ -35,7 +35,7 @@ validate() {
     # validate lang support
     command -v go
     command -v gopls
-    command -v bash-language-server
+    # command -v bash-language-server TODO: fix this
     command -v shellcheck
 }
 

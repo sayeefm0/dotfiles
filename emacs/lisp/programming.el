@@ -18,8 +18,8 @@
 
 (use-package magit
   :straight t
-  :config
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+  :bind
+  ("C-c ]" . magit))
 
 (use-package tree-sitter
   :straight t

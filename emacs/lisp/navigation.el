@@ -25,7 +25,7 @@
 (use-package treemacs
   :straight t
   :bind
-  ("C-c t" . treemacs))
+  ("C-c [" . treemacs))
 
 (use-package which-key
   :straight t

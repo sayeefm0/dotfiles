@@ -58,6 +58,8 @@ alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
 alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
+alias rek="killall emacs"
+alias run="emacs --daemon"
 
 alias gb="git branch"
 alias gbc="git checkout -b"
