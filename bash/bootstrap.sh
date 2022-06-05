@@ -88,7 +88,9 @@ install_tmux() {
 }
 
 setup_go_env() {
-    brew install go
+    if ! command -v go &>/dev/null; then # in case of system go
+        brew install go
+    fi
     go install golang.org/x/tools/gopls@latest
 }
 

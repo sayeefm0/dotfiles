@@ -1,8 +1,3 @@
-;;; init-flycheck.el --- syntax highlighting with pluggable backends
-;;; Commentary:
-;; language-specific flycheck configurations found in their respective init-<lang> file
-;;; Code:
-
 (use-package flycheck
   :straight t
   :bind (:map prog-mode-map
@@ -21,6 +16,19 @@
   :config
   (global-flycheck-mode 1))
 
-(provide 'init-flycheck)
+(use-package magit
+  :straight t
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
-;;; init-flycheck.el ends here
+(use-package tree-sitter
+  :straight t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :straight t
+  :after tree-sitter)
+
+(provide 'programming)

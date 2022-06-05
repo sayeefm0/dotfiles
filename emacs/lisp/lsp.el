@@ -1,9 +1,3 @@
-;;; init-lsp-mode.el --- language server procotol (lsp) config
-;;; Commentary:
-;; This file configures generic lsp settings.
-;; Language-specific configuration is found in init-<lang>.el
-;;; Code:
-
 (use-package lsp-mode
   :straight t
   :init
@@ -20,6 +14,4 @@
   (:map lsp-ui-mode-map
         ("C-c C-l d" . lsp-ui-doc-glance)))
 
-(provide 'init-lsp-mode)
-
-;;; init-lsp-mode.el ends here
+(provide 'lsp)

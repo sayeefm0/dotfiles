@@ -1,8 +1,4 @@
-;;; init-theme.el --- configure appearance
-;;; Commentary:
-;;; Code:
-
-(defun my/load-theme (frame)
+(defun lazy-load-theme (frame)
   (select-frame frame)
   (load-theme 'nord t))
 
@@ -13,9 +9,7 @@
   (load-theme 'nord t)
   ;; need this to load theme properly in emacsclient frames
   (if (daemonp)
-    (add-hook 'after-make-frame-functions #'my/load-theme)
-  (load-theme 'nord t)))
+    (add-hook 'after-make-frame-functions #'lazy-load-theme)
+    (load-theme 'nord t)))
 
-(provide 'init-theme)
-
-;;; init-theme.el ends here
+(provide 'theme)

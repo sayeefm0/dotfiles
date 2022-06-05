@@ -1,78 +1,18 @@
-;;; init.el --- configuration file
-;;; Commentary:
-;; This file contains configuration for Emacs builtins.
-;; Additional package configuration can be found in Lisp 'init-<package>.el' or 'lisp/init-<lang>.el' for
-;; language support requiring multiple packages.
-;;; Code:
-
-;; additional configuration modules
-
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 
-;; variables
+(require 'package-mgmt)
 
-(setq-default indent-tabs-mode nil
-              tab-width 2)
-(setq tab-always-indent 'complete ; if already indented, complete thing at point
-      gc-cons-threshold 100000000
-      read-process-output-max (* 1024 1024))
+(require 'builtin)
+(require 'navigation)
+(require 'completion)
+(require 'programming)
+(require 'theme)
+(require 'lsp)
 
-;; default modes - hl-line-mode is at the end because something is overriding it
-
-(global-display-line-numbers-mode 1)
-(menu-bar-mode -1)
-(winner-mode 1)
-(electric-pair-mode 1)
-(setq fill-column 80)
-(global-display-fill-column-indicator-mode 1)
-(add-hook 'conf-toml-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
-(add-hook 'markdown-mode-hook (lambda () (local-unset-key (kbd "C-c C-p"))))
-
-;; keymap for vim-like movements
-
-(defvar vim-like)
-(define-prefix-command 'vim-like)
-(global-set-key "\C-d" vim-like)
-
-(define-key vim-like (kbd "f") 'zap-to-char)
-(define-key vim-like (kbd "t") 'zap-up-to-char)
-(define-key vim-like (kbd "d") 'delete-char)
-(define-key vim-like (kbd "O")  #'(lambda () (interactive)(move-end-of-line 0)(newline)))
-(define-key vim-like (kbd "o")  #'(lambda () (interactive)(move-end-of-line 1)(newline)))
-(define-key vim-like (kbd "w") #'(lambda () (interactive) (forward-word)(backward-word)(kill-word 1)))
-
-;; builtin keybinds
-
-(global-set-key (kbd "C-c C-w u") 'winner-undo)
-(global-set-key (kbd "C-c C-w r") 'winner-redo)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;;  package configurations
-
-(require 'init-straight)       ; this has to be first
-(require 'init-use-package)    ; this has to be after straight, but before everything else
-
-(require 'init-ace)
-(require 'init-avy)
-(require 'init-company)
-(require 'init-dot-mode)
-(require 'init-flycheck)
-(require 'init-magit)
-(require 'init-markdown)
-(require 'init-projectile)
-(require 'init-selectrum)
-(require 'init-sunrise)
-(require 'init-theme)
-(require 'init-tree-sitter)
-(require 'init-which-key)
-(require 'init-yaml)
-
-(require 'init-lsp-mode)
-(require 'init-bash)
-(require 'init-go-lang)
-
-(global-hl-line-mode 1)    ; TODO: figure out what's overriding this
+(require 'bash)
+(require 'go)
+(require 'markdown)
+(require 'yaml)
 
 (provide 'init)
-
-;;; init.el ends here
