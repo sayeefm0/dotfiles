@@ -22,6 +22,11 @@
   ("C-c C-p p" . projectile-switch-project)
   ("C-c C-p a" . projectile-add-known-project))
 
+(use-package treemacs
+  :straight t
+  :bind
+  ("C-c t" . treemacs))
+
 (use-package which-key
   :straight t
   :config

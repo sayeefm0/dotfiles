@@ -57,7 +57,7 @@ install_homebrew() {
 install_nvm() {
     if ! command -v nvm &>/dev/null; then
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-        [ -s "$HOME/.nvm/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # load nvm
+        [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh" # load nvm
     fi    
 }
 
