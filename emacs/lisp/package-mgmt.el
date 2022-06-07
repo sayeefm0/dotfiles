@@ -1,12 +1,5 @@
-(defun load-package-mgmt()
-  ;; this is a function to keep driving code visible
-  ;; call to load-package-mgmt near end of file
-  (install-straight)
-  (straight-use-package 'use-package)
-  (provide 'package-mgmt))
-
-(defun install-straight()
-  ;; install straight.el - replacement for package.el
+(defun make-sure-straight-is-installed()
+  ;; replacement for package.el
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -20,4 +13,6 @@
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage)))
 
-(load-package-mgmt)
+(make-sure-straight-is-installed)
+(straight-use-package 'use-package)
+(provide 'package-mgmt)

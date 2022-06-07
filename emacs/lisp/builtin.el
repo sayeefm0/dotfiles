@@ -14,18 +14,16 @@
 (global-display-fill-column-indicator-mode 1)
 (global-display-line-numbers-mode 1)
 (menu-bar-mode -1)
-(winner-mode 1)
+(winner-mode)
 
-;; keymaps & binds
+ ;; keybinds
 
-(defun run-in-prev-pane (command)
+(defun tmux-run (command)
   (interactive "s$ ")
   (call-process "tmux" nil nil nil "send-keys" "-t!" command "Enter"))
+(define-key usr-map (kbd ";") #'tmux-run)
+(define-key usr-map (kbd "'") (lambda() (interactive) (tmux-run "!!")))
 
-(define-prefix-command 'vim-like)
-(global-set-key "\C-d" vim-like)
-(global-set-key (kbd "C-c ;") 'run-in-prev-pane)
-(global-set-key (kbd "C-c '") (lambda() (interactive)(run-in-prev-pane "!!")))
-(global-set-key (kbd "C-c ,") 'winner-undo)
+(define-key usr-map (kbd "u") 'winner-undo)
 
 (provide 'builtin)
