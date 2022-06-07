@@ -35,8 +35,10 @@ validate() {
     # validate lang support
     command -v go
     command -v gopls
-    # command -v bash-language-server TODO: fix this
-    command -v shellcheck
+    command -v dlv
+    # TODO: fix the build
+    # command -v bash-language-server
+    # command -v shellcheck
 }
 
 # utility functions
@@ -92,6 +94,8 @@ setup_go_env() {
         brew install go
     fi
     go install golang.org/x/tools/gopls@latest
+    go install github.com/go-delve/delve/cmd/dlv@master
+    export PATH="$PATH:$(go env GOPATH)/bin"  
 }
 
 setup_bash_env() {

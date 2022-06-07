@@ -15,4 +15,6 @@
 (require 'markdown)
 (require 'yaml)
 
+(global-hl-line-mode 1)
+
 (provide 'init)

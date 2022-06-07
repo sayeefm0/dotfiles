@@ -45,7 +45,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
 # :: aliases
 
-alias cd="pushd"
+alias cdp="pushd"
 alias cdl="dirs -v"
 alias cdr="dirs -c"
 alias e='${EDITOR}'
@@ -54,10 +54,12 @@ alias lsa="ls -a"
 alias lsl="ls -al"
 alias src="source ~/.bash_profile"
 
+alias brain="e $HOME/.brain.org"
 alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
 alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
+
 alias rek="killall emacs"
 alias run="emacs --daemon"
 
@@ -71,5 +73,5 @@ alias gs="git status"
 
 alias tma="tmux attach"
 alias tml="tmux ls"
-alias tmsc="tmux new -s main"
-alias tmsk="tmux kill-server"
+alias tmnew="tmux new -s main"
+alias tmk="tmux kill-server"

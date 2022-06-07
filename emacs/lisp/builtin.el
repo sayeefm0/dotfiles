@@ -18,7 +18,14 @@
 
 ;; keymaps & binds
 
+(defun run-in-prev-pane (command)
+  (interactive "s$ ")
+  (call-process "tmux" nil nil nil "send-keys" "-t!" command "Enter"))
+
 (define-prefix-command 'vim-like)
 (global-set-key "\C-d" vim-like)
+(global-set-key (kbd "C-c ;") 'run-in-prev-pane)
+(global-set-key (kbd "C-c '") (lambda() (interactive)(run-in-prev-pane "!!")))
+(global-set-key (kbd "C-c ,") 'winner-undo)
 
 (provide 'builtin)
