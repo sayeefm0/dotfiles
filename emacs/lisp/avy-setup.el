@@ -2,6 +2,9 @@
   :straight t
   :bind
   (:map usr-map
-        ("l" . avy-goto-line)))
+        ("C-l" . avy-goto-line)
+        ("C-w" . avy-goto-word-1)
+        ("C-d" . avy-kill-whole-line)
+        ("C-k" . avy-kill-region)))
 
 (provide 'avy-setup)

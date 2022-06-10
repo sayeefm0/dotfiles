@@ -26,5 +26,6 @@
 (define-key usr-map (kbd "'") (lambda() (interactive) (tmux-run "!!")))
 
 (define-key usr-map (kbd "u") 'winner-undo)
+(define-key usr-map (kbd "k") (lambda() (interactive) (kill-buffer (current-buffer))))
 
 (provide 'builtin)

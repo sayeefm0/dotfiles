@@ -13,6 +13,7 @@
 ;; additional package configurations
 (require 'ace-window-setup)
 (require 'avy-setup)
+(require 'focus-setup)
 (require 'projectile-setup)
 (require 'treemacs-setup)
 (require 'which-key-setup)
@@ -21,6 +22,8 @@
 (require 'flycheck-setup)
 (require 'magit-setup)
 (require 'tree-sitter-setup)
+(require 'ws-butler-setup)
+(require 'zzz-to-char-setup)
 
 ;; base lang support
 (require 'lsp-setup)

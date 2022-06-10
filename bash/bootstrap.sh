@@ -79,7 +79,7 @@ install_iterm() {
 install_emacs() {
     brew tap d12frosted/emacs-plus
     brew install libgccjit
-    brew install emacs-plus@28 --with-native-comp --without-cocoa    
+    brew install emacs-plus@29 --with-native-comp --without-cocoa
 }
 
 install_tmux() {
