@@ -2,7 +2,8 @@
 
 (setq-default indent-tabs-mode nil
               tab-width 2)
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
+(setq; auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-saves/" t))
+      backup-directory-alist '(("." . "~/.emacs.d/backups"))
       fill-column 80
       gc-cons-threshold 100000000
       read-process-output-max (* 1024 1024)
