@@ -5,7 +5,6 @@
   (:map usr-map
         ("v f" . focus-mode))
   :config
-  (add-to-list 'focus-mode-to-thing '(prog-mode . paragraph))
-  (add-to-list 'focus-mode-to-thing '(conf-space-mode . paragraph)))
+  (add-to-list 'focus-mode-to-thing '(prog-mode . paragraph)))
 
 (provide 'focus-setup)

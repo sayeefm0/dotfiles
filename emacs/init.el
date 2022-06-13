@@ -23,7 +23,6 @@
 (require 'magit-setup)
 (require 'tree-sitter-setup)
 (require 'ws-butler-setup)
-(require 'zzz-to-char-setup)
 
 ;; base lang support
 (require 'lsp-setup)

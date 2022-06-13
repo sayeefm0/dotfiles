@@ -60,9 +60,6 @@ alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
 alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
 
-alias rek="killall emacs"
-alias run="emacs --daemon"
-
 alias gb="git branch"
 alias gbc="git checkout -b"
 alias gc="git checkout"
@@ -71,7 +68,14 @@ alias gm="git merge"
 alias gp="git pull --ff-only"
 alias gs="git status"
 
-alias tma="tmux attach"
-alias tml="tmux ls"
-alias tmnew="tmux new -s main"
-alias tmk="tmux kill-server"
+alias tek="tmux kill-server"
+alias tun="tmux new-session -As main"
+
+alias rek="killall emacs"
+alias run="emacs --daemon"
+alias er="rek;run"
+
+# :: startup
+if [ -z "$TMUX" ]; then
+    tun
+fi
