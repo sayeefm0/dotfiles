@@ -36,7 +36,8 @@ validate() {
     command -v go
     command -v gopls
     command -v dlv
-    command -v bash-language-server
+    # TODO: is there a better way of checking this?
+    npm ls | grep bash-language-server
     command -v shellcheck
 }
 

@@ -23,6 +23,7 @@
 (require 'magit-setup)
 (require 'tree-sitter-setup)
 (require 'ws-butler-setup)
+(require 'writeroom-setup)
 
 ;; base lang support
 (require 'lsp-setup)

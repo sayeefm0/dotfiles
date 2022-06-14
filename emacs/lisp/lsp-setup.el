@@ -4,6 +4,7 @@
   (:map usr-map
         ("i i" . lsp-execute-code-action))
   :config
+  (setq lsp-headerline-breadcrumb-enable nil)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t))))

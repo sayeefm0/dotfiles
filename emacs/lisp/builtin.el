@@ -4,7 +4,6 @@
               tab-width 2)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
       gc-cons-threshold 100000000
-      initial-buffer-choice "~/.brain.org"
       read-process-output-max (* 1024 1024))
 
 (set-face-foreground 'vertical-border "#3b4151")
@@ -26,7 +25,6 @@
 ;; modes
 
 (electric-pair-mode 1)
-(global-display-line-numbers-mode 1)
 (menu-bar-mode -1)
 (winner-mode)
 
