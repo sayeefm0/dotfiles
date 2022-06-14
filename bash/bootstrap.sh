@@ -36,9 +36,8 @@ validate() {
     command -v go
     command -v gopls
     command -v dlv
-    # TODO: fix the build
-    # command -v bash-language-server
-    # command -v shellcheck
+    command -v bash-language-server
+    command -v shellcheck
 }
 
 # utility functions
@@ -60,6 +59,7 @@ install_nvm() {
     if ! command -v nvm &>/dev/null; then
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
         [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh" # load nvm
+        nvm install --lts # install latest node
     fi    
 }
 

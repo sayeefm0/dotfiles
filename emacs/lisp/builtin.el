@@ -5,8 +5,7 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
       gc-cons-threshold 100000000
       initial-buffer-choice "~/.brain.org"
-      read-process-output-max (* 1024 1024)
-      tab-always-indent 'complete) ; indent or complete
+      read-process-output-max (* 1024 1024))
 
 (set-face-foreground 'vertical-border "#3b4151")
 (set-display-table-slot standard-display-table
