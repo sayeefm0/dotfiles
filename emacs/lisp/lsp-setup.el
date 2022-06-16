@@ -2,6 +2,7 @@
   :straight t
   :bind
   (:map usr-map
+        ("i d" . lsp-describe-thing-at-point)
         ("i i" . lsp-execute-code-action))
   :config
   (setq lsp-headerline-breadcrumb-enable nil)

@@ -37,7 +37,7 @@ export GOPATH=$(go env GOPATH)
 export PATH="$PATH:$GOPATH/bin"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  #
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export LSP_USE_PLISTS=true # improve lsp-mode perf
@@ -45,16 +45,11 @@ export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
 # :: aliases
 
-alias cdp="pushd"
-alias cdl="dirs -v"
-alias cdr="dirs -c"
 alias e='${EDITOR}'
-alias ls="ls --color=always"
-alias lsa="ls -a"
-alias lsl="ls -al"
+alias ls="ls --color=always --group-directories-first -I Desktop -I Documents -I Downloads -I Library -I Movies -I Music -I Pictures -I Public"
+alias lsa="ls -A"
 alias src="source ~/.bash_profile"
 
-alias brain="e $HOME/.brain.org"
 alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
@@ -68,14 +63,13 @@ alias gm="git merge"
 alias gp="git pull --ff-only"
 alias gs="git status"
 
-alias tek="tmux kill-server"
-alias tun="tmux new-session -As main"
+alias tmk="tmux kill-server"
+alias tmr="tmux new-session -As main"
 
-alias rek="killall emacs"
-alias run="emacs --daemon"
-alias er="rek;run"
+alias ek="killall emacs"
+alias er="emacs --daemon"
 
 # :: startup
 if [ -z "$TMUX" ]; then
-    tun
+    tmr && er
 fi

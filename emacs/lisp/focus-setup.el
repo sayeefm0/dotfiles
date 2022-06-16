@@ -3,8 +3,6 @@
   :hook (prog-mode . focus-mode)
   :bind
   (:map usr-map
-        ("v f" . focus-mode))
-  :config
-  (add-to-list 'focus-mode-to-thing '(prog-mode . paragraph)))
+        ("v f" . focus-mode)))
 
 (provide 'focus-setup)

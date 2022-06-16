@@ -19,8 +19,7 @@
                          '(:background "#BF616A" :foreground "white")
                        '(:background "#8FBCBB" :foreground "black"))))
         "\t"
-        (:propertize (vc-mode vc-mode) face (:weight normal))
-         "\t" mode-line-modes))
+        (:propertize (vc-mode vc-mode) face (:weight normal))))
 
 ;; modes
 
@@ -33,15 +32,26 @@
 (defun tmux-run (command)
   (interactive "s$ ")
   (call-process "tmux" nil nil nil "send-keys" "-t!" command "Enter"))
+(defun tmux-run-prev()
+  (interactive)
+  (tmux-run "!!"))
 (define-key usr-map (kbd ";") #'tmux-run)
-(define-key usr-map (kbd "'") (lambda() (interactive) (tmux-run "!!")))
+(define-key usr-map (kbd "'") #'tmux-run-prev)
 
 (defun kill-other-buffers ()
      (interactive)
      (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-(define-key usr-map (kbd "u") 'winner-undo)
 (define-key usr-map (kbd "1") 'kill-other-buffers)
+
+(defun kill-word-at-point ()
+  (let ((bounds (bounds-of-thing-at-point 'word)))
+    (if bounds
+        (kill-region (car bounds) (cdr bounds)))))
+(define-key usr-map (kbd "w") 'kill-word-at-point)
+
+(define-key usr-map (kbd "m s") 'point-to-register)
+(define-key usr-map (kbd "m p") 'jump-to-register)
+(define-key usr-map (kbd "u") 'winner-undo)
 (define-key usr-map (kbd "k") (lambda() (interactive) (kill-buffer (current-buffer))))
-(define-key usr-map (kbd "v c") 'global-display-fill-column-indicator-mode)
 
 (provide 'builtin)
