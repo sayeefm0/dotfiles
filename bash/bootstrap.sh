@@ -14,8 +14,8 @@ main() {
     install_emacs
     install_tmux    
     install_iterm
-    install_fonts    
-    
+    install_fonts
+
     setup_go_env
     setup_bash_env
 

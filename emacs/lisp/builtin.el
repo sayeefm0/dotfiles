@@ -44,6 +44,7 @@
 (define-key usr-map (kbd "1") 'kill-other-buffers)
 
 (defun kill-word-at-point ()
+  (interactive)
   (let ((bounds (bounds-of-thing-at-point 'word)))
     (if bounds
         (kill-region (car bounds) (cdr bounds)))))

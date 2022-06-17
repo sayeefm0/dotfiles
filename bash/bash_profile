@@ -69,6 +69,9 @@ alias tmr="tmux new-session -As main"
 alias ek="killall emacs"
 alias er="emacs --daemon"
 
+alias gomt="go mod tidy"
+alias gocl="go clean -modcache"
+
 # :: startup
 if [ -z "$TMUX" ]; then
     tmr && er
