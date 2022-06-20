@@ -24,6 +24,7 @@
 (require 'tree-sitter-setup)
 (require 'ws-butler-setup)
 (require 'writeroom-setup)
+(require 'hl-todo-setup)
 
 ;; base lang support
 (require 'lsp-setup)

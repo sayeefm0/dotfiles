@@ -10,12 +10,4 @@
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t))))
 
-(use-package lsp-ui
-  :straight t
-  :after lsp-mode
-  :config
-  (setq lsp-ui-sideline-show-hover t)
-  (setq lsp-ui-sideline-show-code-actions t)
-  (setq lsp-ui-sideline-show-diagnostics 'nil))
-
 (provide 'lsp-setup)
