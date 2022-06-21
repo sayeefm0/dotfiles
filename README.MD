@@ -1,22 +1,28 @@
 <div align="center">
 
-# bbflower dotfiles
+ # bbflower dotfiles
 
-![os](https://img.shields.io/badge/os-gray?style=for-the-badge&labelColor=6D9DC5&logo=apple) 
-![emacs](https://img.shields.io/badge/emacs-gray?style=for-the-badge&labelColor=646CFF&logo=gnuemacs&logoColor=white)
-![shell](https://img.shields.io/badge/bash-gray?style=for-the-badge&logo=gnubash&labelColor=179287&logoColor=white)
-![tmux](https://img.shields.io/badge/tmux-gray?style=for-the-badge&logo=tmux&labelColor=0AC18E&logoColor=white)
+ ![os](https://img.shields.io/badge/mac-7ebebd?style=for-the-badge&labelColor=282b33&logo=apple)
+ ![emacs](https://img.shields.io/badge/emacs-7ebebd?style=for-the-badge&labelColor=282b33&logo=gnuemacs&logoColor=white)
+ ![bash](https://img.shields.io/badge/bash-7ebebd?style=for-the-badge&labelColor=282b33&logo=gnubash&logoColor=white)
+ ![tmux](https://img.shields.io/badge/tmux-7ebebd?style=for-the-badge&labelColor=282b33&logo=tmux&logoColor=white)
  
-![last commit](https://img.shields.io/github/last-commit/bbflower/dotfiles?style=for-the-badge&logo=git&labelColor=357DED&logoColor=white&color=gray)
-![build](https://img.shields.io/github/workflow/status/bbflower/dotfiles/Bootstrap%20Develop%20Environment?style=for-the-badge)
-
+ **Uniform, lean dotfiles**
+ 
+ ---
+ 
+ ![showcase](img/dotfiles-multi-split.png)
+ 
 </div>
 
 ## Core Principles
 
-- As minimal as possible
-- Consistent keybinds in emacs and tmux
-- Obvious code
+- Attention sparing
+    - ~modeline~, ~tmux statusline~, ~line numbers~, ~git-diff~
+- Use defaults whenever reasonable
+- Consistent, predictable keybinds across layers
+    - e.g. `C-x 1`, `C-d 1`, `C-t 1` will isolate the emacs window, isolate the emacs buffer, and isolate the tmux pane, respectively.
+- Configuration code **_must_** be simple, and its behavior obvious
 
 ## Install
 
@@ -27,3 +33,26 @@
 
 1. `git clone https://github.com/bbflower/dotfiles.git`
 2. `bash dotfiles/bash/bootstrap.sh`
+
+## Misc
+
+- Font: [JetBrains Mono](https://www.jetbrains.com/lp/mono/) `14pt`
+- iTerm line spacing: `105`
+
+## Screenshots
+
+<div align="center"> 
+
+ tuned distraction free editing, including peripheral text dimming a la focus-mode
+ 
+ ![focus](img/dotfiles-focus.png)
+ 
+ lsp integration and autocompletion
+ 
+ ![lsp](img/dotfiles-lsp.png)
+ 
+ embedded git porcelain via magit
+
+ ![magit](img/dotfiles-magit.png)
+ 
+</div>

@@ -1,16 +1,17 @@
 (defun frame-local-load-theme (frame)
+  ;; Emacsclient compatible call to load-theme
   (select-frame frame)
-  (load-nord-with-mods))
+  (load-theme-with-mods))
 
-(defun load-nord-with-mods()
-  (load-theme 'nord t)
-  (set-face-foreground 'vertical-border "#2E3440")) ; nord bg color
+(defun load-theme-with-mods()
+  (load-theme 'doom-wilmersdorf t)
+  (set-face-foreground 'vertical-border "#282b33")
+  (set-face-background 'vertical-border "#282b33"))
 
-(use-package nord-theme
+(use-package doom-themes
   :config
-  (setq nord-region-highlight 'frost)
   (if (daemonp)
       (add-hook 'after-make-frame-functions #'frame-local-load-theme)
-    (load-nord-with-mods)))
+    (load-theme-with-mods)))
 
 (provide 'theme)
