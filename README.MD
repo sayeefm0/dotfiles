@@ -14,9 +14,9 @@
 
 ## Core Principles
 
-- More minimal than other "minimal" setups - remove **all** noise; only see what's required *right now*
-- Consistent keybinds for emacs and tmux
-- No magic
+- As minimal as possible
+- Consistent keybinds in emacs and tmux
+- Obvious code
 
 ## Install
 

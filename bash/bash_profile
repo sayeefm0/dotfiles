@@ -1,5 +1,6 @@
 # shellcheck shell=bash
 CONFIG_DIR="$HOME/dotfiles"
+SANDBOX="$HOME/develop/sandbox"
 
 # :: environment variables
 
@@ -14,7 +15,7 @@ __prompt() {
     PS1="$blackbg"
     # diff color if the previous command failed
     if [ $prevexit -ne 0 ]; then
-        PS1+="$redfg[$prevexit]\W/"
+        PS1+="$redfg[$prevexit] \W/"
     else
         PS1+="$bluefg\W/"
     fi
@@ -71,6 +72,7 @@ alias er="emacs --daemon"
 
 alias gomt="go mod tidy"
 alias gocl="go clean -modcache"
+alias sgo="e $SANDBOX/main.go"
 
 # :: startup
 if [ -z "$TMUX" ]; then
