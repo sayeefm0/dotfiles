@@ -1,8 +1,8 @@
 (use-package focus
-  :straight t
-  :hook (prog-mode . focus-mode)
+  :hook
+  (prog-mode . focus-mode)
   :bind
-  (:map usr-map
-        ("v f" . focus-mode)))
+  (:map usr-map/view
+        ("f" . focus-mode)))
 
 (provide 'focus-setup)

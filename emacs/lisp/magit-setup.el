@@ -1,7 +1,5 @@
 (use-package magit
-  :straight t
-  :bind
-  (:map usr-map
-        ("]" . magit)))
+  :init
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 (provide 'magit-setup)

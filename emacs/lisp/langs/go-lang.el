@@ -5,7 +5,7 @@
 (use-package go-mode
   :straight t
   :config
-  (add-hook 'go-mode-hook #'go-on-save-hooks)
-  (add-hook 'go-mode-hook #'lsp-deferred))
+  (add-hook 'go-mode-hook #'lsp-deferred)
+  (add-hook 'go-mode-hook #'go-on-save-hooks))
 
 (provide 'go-lang)

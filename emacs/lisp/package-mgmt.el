@@ -15,4 +15,5 @@
 
 (make-sure-straight-is-installed)
 (straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 (provide 'package-mgmt)
