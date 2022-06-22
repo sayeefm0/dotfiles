@@ -15,7 +15,8 @@ main() {
     install_tmux    
     install_iterm
     install_fonts
-
+    install_hugo
+    
     setup_go_env
     setup_bash_env
 
@@ -32,6 +33,7 @@ validate() {
     command -v rg
     command -v emacs
     command -v tmux
+    command -v hugo
     # validate lang support
     command -v go
     command -v gopls
@@ -71,6 +73,10 @@ install_cli_utils() {
 install_fonts() {
     brew tap homebrew/cask-fonts
     brew install --cask font-jetbrains-mono    
+}
+
+install_hugo() {
+    brew install hugo
 }
 
 install_iterm() {

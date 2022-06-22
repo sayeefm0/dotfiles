@@ -37,7 +37,7 @@
 (define-key usr-map (kbd "w") 'kill-word-at-point)
 (global-set-key "\C-x\C-b" 'ibuffer)
 (define-key usr-map (kbd "m s") 'point-to-register)
-(define-key usr-map (kbd "m p") 'jump-to-register)
+(define-key usr-map (kbd "m j") 'jump-to-register)
 (define-key usr-map (kbd "0") (lambda() (interactive) (kill-buffer (current-buffer))))
 (define-key usr-map/buffer (kbd "p") 'switch-to-prev-buffer)
 (define-key usr-map (kbd "C-q") 'delete-frame)

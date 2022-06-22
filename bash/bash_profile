@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-CONFIG_DIR="$HOME/dotfiles"
+CONFIG_DIR="$HOME/develop/dotfiles"
 SANDBOX="$HOME/develop/sandbox"
 
 # :: environment variables
@@ -55,6 +55,7 @@ alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
 alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
+alias brain="e $HOME/.brain.org"
 
 alias gb="git branch"
 alias gbc="git checkout -b"
@@ -73,8 +74,3 @@ alias er="emacs --daemon"
 alias gomt="go mod tidy"
 alias gocl="go clean -modcache"
 alias sgo="e $SANDBOX/main.go"
-
-# :: startup
-if [ -z "$TMUX" ]; then
-    tmr && er
-fi

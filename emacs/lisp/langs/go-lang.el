@@ -3,7 +3,6 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :straight t
   :config
   (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'go-mode-hook #'go-on-save-hooks))

@@ -1,5 +1,4 @@
 (use-package lsp-mode
-  :straight t
   :bind
   (:map usr-map
         ("i d" . lsp-describe-thing-at-point)
