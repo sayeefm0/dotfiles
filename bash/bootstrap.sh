@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 DOTFILES_DIR="${1:-$HOME/dotfiles}"
 
 # main function used to keep driving code near start of file
@@ -15,7 +14,6 @@ main() {
     install_tmux    
     install_iterm
     install_fonts
-    install_hugo
     
     setup_go_env
     setup_bash_env
@@ -25,22 +23,21 @@ main() {
 
 validate() {
     # validate package managers
-    command -v brew
-    command -v nvm
+    command -v brew || exit 1
+    command -v nvm || exit 1
     # validate cli
-    command -v fd
-    command -v gh
-    command -v rg
-    command -v emacs
-    command -v tmux
-    command -v hugo
+    command -v fd || exit 1
+    command -v gh || exit 1
+    command -v rg || exit 1
+    command -v emacs || exit 1
+    command -v tmux || exit 1
     # validate lang support
-    command -v go
-    command -v gopls
-    command -v dlv
+    command -v go || exit 1
+    command -v gopls || exit 1
+    command -v dlv || exit 1
     # TODO: is there a better way of checking this?
-    npm ls | grep bash-language-server
-    command -v shellcheck
+    npm ls | grep bash-language-server || exit 1
+    command -v shellcheck || exit 1
 }
 
 # utility functions
@@ -73,10 +70,6 @@ install_cli_utils() {
 install_fonts() {
     brew tap homebrew/cask-fonts
     brew install --cask font-jetbrains-mono    
-}
-
-install_hugo() {
-    brew install hugo
 }
 
 install_iterm() {
