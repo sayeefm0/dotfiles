@@ -24,11 +24,14 @@ __prompt() {
         PS1+=" $greenfg::$(git branch --show-current):: "
     fi
     PS1+="$ $endcolor "
+    history -a
 }
 PROMPT_COMMAND=__prompt
 
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -t"
+export HISTSIZE=2000
+shopt -s histappend
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -50,7 +53,7 @@ alias e='${EDITOR}'
 alias ls="ls --color=always --group-directories-first -I Desktop -I Documents -I Downloads -I Library -I Movies -I Music -I Pictures -I Public"
 alias lsa="ls -A"
 alias src="source ~/.bash_profile"
-
+alias ctop="grep -Ev '^ls|^ctop' $HISTFILE | sort | uniq -c | sort -n"
 alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
