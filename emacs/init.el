@@ -9,6 +9,7 @@
 (define-key usr-map (kbd "v") usr-map/view)
 
 (require 'package-mgmt)
+(require 'benchmarking)
 (require 'builtin)
 
 ;; additional package configurations
@@ -22,6 +23,7 @@
 (require 'flycheck-setup)
 (require 'magit-setup)
 (require 'tree-sitter-setup)
+(require 'ws-butler-setup)
 
 (require 'theme)
 
