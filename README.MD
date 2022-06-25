@@ -7,10 +7,8 @@
  ![bash](https://img.shields.io/badge/bash-7ebebd?style=for-the-badge&labelColor=2E3440&logo=gnubash&logoColor=white)
  ![tmux](https://img.shields.io/badge/tmux-A3BE8C?style=for-the-badge&labelColor=2E3440&logo=tmux&logoColor=white)
  
- [getting started](#getting-started)
+ ![ci](https://img.shields.io/github/workflow/status/sayeefm0/dotfiles/bootstrap?label=CI&logo=github&style=for-the-badge)
  
- ---
-
 </div>
 
 ## about

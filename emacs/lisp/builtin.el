@@ -42,4 +42,6 @@
 (define-key usr-map/buffer (kbd "p") 'switch-to-prev-buffer)
 (define-key usr-map (kbd "C-q") 'delete-frame)
 
+(define-key usr-map/view (kbd "n") (lambda() (interactive) (find-file-other-window "~/.brain.org")))
+
 (provide 'builtin)
