@@ -1,5 +1,6 @@
-(defun make-sure-straight-is-installed()
-  ;; replacement for package.el
+(defun init-packaging()
+  ;; Make sure straight and use-package are available
+  ;; Most of this is copy-pasted from the straight documentation
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -11,9 +12,9 @@
            'silent 'inhibit-cookies)
         (goto-char (point-max))
         (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage)))
+    (load bootstrap-file nil 'nomessage))
+  (straight-use-package 'use-package)
+  (setq straight-use-package-by-default t))
 
-(make-sure-straight-is-installed)
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
+(init-packaging)
 (provide 'package-mgmt)

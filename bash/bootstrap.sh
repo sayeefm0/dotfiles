@@ -64,7 +64,8 @@ install_nvm() {
 }
 
 install_cli_utils() {
-    brew install coreutils fd gh ripgrep
+    brew install coreutils fd gh ripgrep fzf
+    $(brew --prefix)/opt/fzf/install
 }
 
 install_fonts() {

@@ -9,4 +9,4 @@
   :config
   (selectrum-prescient-mode +1))
 
-(provide 'selectrum-setup)
+(provide 'selectrum)

@@ -2,4 +2,4 @@
   :config
   (ws-butler-global-mode 1))
 
-(provide 'ws-butler-setup)
+(provide 'ws-butler)

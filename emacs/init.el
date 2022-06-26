@@ -1,41 +1,31 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
-
-(define-prefix-command 'usr-map)
-(define-prefix-command 'usr-map/buffer)
-(define-prefix-command 'usr-map/view)
-(global-set-key "\C-d" usr-map)
-(define-key usr-map (kbd "b") usr-map/buffer)
-(define-key usr-map (kbd "v") usr-map/view)
-
 (require 'package-mgmt)
 (require 'benchmarking)
+
+(require 'keymaps)
 (require 'builtin)
+(require 'tmux)
 
-;; additional package configurations
-(require 'avy-setup)
-(require 'focus-setup)
-(require 'writeroom-setup)
-(require 'projectile-setup)
-(require 'which-key-setup)
-(require 'company-setup)
-(require 'selectrum-setup)
-(require 'flycheck-setup)
-(require 'magit-setup)
-(require 'tree-sitter-setup)
-(require 'ws-butler-setup)
-
+;; external packages
+(require 'avy)
+(require 'company)
+(require 'flycheck)
+(require 'fzf)
+(require 'magit)
+(require 'selectrum)
 (require 'theme)
+(require 'tree-sitter)
+(require 'writeroom)
+(require 'ws-butler)
 
-;; base lang support
-(require 'lsp-setup)
-(require 'dap-setup)
+;; programming language support
+(add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
+(require 'lsp)
+(require 'dap)
 ;; langs
-(require 'bash-lang)
-(require 'go-lang)
-(require 'markdown-lang)
-(require 'yaml-lang)
-
-(global-hl-line-mode 1)
+(require 'bash)
+(require 'go)
+(require 'markdown)
+(require 'yaml)
 
 (provide 'init)

@@ -1,5 +1,4 @@
 (use-package dap-mode
-  :straight t
   :config
   (setq dap-auto-configure-features '(breakpoints locals))
   (add-hook 'dap-stopped-hook
@@ -15,4 +14,4 @@
         ("d l" . dap-ui-breakpoints-list)
         ("d h" . dap-hydra)))
 
-(provide 'dap-setup)
+(provide 'dap)

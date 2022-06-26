@@ -1,47 +1,41 @@
-;; variables
-
-(setq-default indent-tabs-mode nil
-              mode-line-format nil
-              tab-width 2)
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups"))
-      gc-cons-threshold 100000000
-      read-process-output-max (* 1024 1024))
-
-
-;; modes
-
 (electric-pair-mode 1)
+(global-hl-line-mode 1)
 (menu-bar-mode -1)
 
-;; keybinds
+(setq-default
+ indent-tabs-mode nil
+ mode-line-format nil
+ tab-width 2) ;
 
-(defun tmux-run (command)
-  (interactive "s$ ")
-  (call-process "tmux" nil nil nil "send-keys" "-t!" command "Enter"))
-(defun tmux-run-prev()
+(setq
+ backup-directory-alist '(("." . "~/.emacs.d/backups"))
+ gc-cons-threshold 100000000
+ read-process-output-max (* 1024 1024))
+
+(defun kill-other-buffers()
   (interactive)
-  (tmux-run "!!"))
-(define-key usr-map (kbd ";") #'tmux-run)
-(define-key usr-map (kbd "'") #'tmux-run-prev)
+  (mapc #'kill-buffer (delq (current-buffer) (buffer-list))))
 
-(defun kill-other-buffers ()
-     (interactive)
-     (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
-(define-key usr-map (kbd "1") 'kill-other-buffers)
+(defun kill-current-buffer()
+  (interactive)
+  (kill-buffer (current-buffer))
+  (delete-window))
 
-(defun kill-word-at-point ()
+(defun kill-word-at-point()
   (interactive)
   (let ((bounds (bounds-of-thing-at-point 'word)))
     (if bounds
         (kill-region (car bounds) (cdr bounds)))))
-(define-key usr-map (kbd "w") 'kill-word-at-point)
-(global-set-key "\C-x\C-b" 'ibuffer)
-(define-key usr-map (kbd "m s") 'point-to-register)
-(define-key usr-map (kbd "m j") 'jump-to-register)
-(define-key usr-map (kbd "0") (lambda() (interactive) (kill-buffer (current-buffer))))
-(define-key usr-map/buffer (kbd "p") 'switch-to-prev-buffer)
-(define-key usr-map (kbd "C-q") 'delete-frame)
 
-(define-key usr-map/view (kbd "n") (lambda() (interactive) (find-file-other-window "~/.brain.org")))
+(defun notes()
+  (interactive)
+  (find-file-other-window "~/.brain.org"))
+
+(define-key usr-map (kbd "1") #'kill-other-buffers)
+(define-key usr-map (kbd "0") #'kill-current-buffer)
+(define-key usr-map (kbd "w") #'kill-word-at-point)
+(define-key usr-map (kbd "\C-c") #'delete-frame)
+(define-key usr-map (kbd "p") #'switch-to-prev-buffer)
+(define-key usr-map (kbd "n") #'notes)
 
 (provide 'builtin)

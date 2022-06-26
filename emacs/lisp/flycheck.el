@@ -6,4 +6,4 @@
   (global-flycheck-mode 1)
   (setq flycheck-check-syntax-automatically '(save))) ; default too aggressive
 
-(provide 'flycheck-setup)
+(provide 'flycheck)

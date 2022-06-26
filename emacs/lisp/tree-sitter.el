@@ -6,4 +6,4 @@
 (use-package tree-sitter-langs
   :after tree-sitter)
 
-(provide 'tree-sitter-setup)
+(provide 'tree-sitter)

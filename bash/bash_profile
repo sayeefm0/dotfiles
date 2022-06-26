@@ -44,12 +44,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  #
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export FZF_DEFAULT_COMMAND="fd"
 export LSP_USE_PLISTS=true # improve lsp-mode perf
 export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
 # :: aliases
 
 alias e='${EDITOR}'
+alias ie='e $(fzf)'
+alias icd='cd $(fzf)'
 alias ls="ls --color=always --group-directories-first -I Desktop -I Documents -I Downloads -I Library -I Movies -I Music -I Pictures -I Public"
 alias lsa="ls -A"
 alias src="source ~/.bash_profile"
