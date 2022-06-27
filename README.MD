@@ -70,9 +70,7 @@ to the rule. Here are some things that you should know about how I use emacs bef
 - I use `straight.el` in place of `package.el`. If you're a `doom` user, this will be familiar. 
 - Startup time can be found in `*Messages*`. Benchmarking (as shown below) available with `benchmark-init/show-durations-tree`.
 
-This is not a configuration framework, but it could be a good starting point for your own `init.el`, or as a reference for 
-configuring [`lsp-mode`](https://github.com/emacs-lsp/lsp-mode) and [`dap-mode`](https://github.com/emacs-lsp/dap-mode), 
-which seem to cause a lot of custom config rollers problems.
+This is not a configuration framework, but it could be a good starting point for your own `init.el`.
 
 ### startup 
 

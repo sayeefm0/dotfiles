@@ -21,7 +21,6 @@
 ;; programming language support
 (add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 (require 'lsp)
-(require 'dap)
 ;; langs
 (require 'bash)
 (require 'go)

@@ -4,12 +4,16 @@ SANDBOX="$HOME/develop/sandbox"
 
 # :: environment variables
 
+function git_dirty {
+  [ -n "$(git status -s 2>/dev/null)" ]
+}
 __prompt() {
     local prevexit="$?"
     local blackbg="\[\e[40m\]"
     local redfg="\[\e[31m\]"
+    local greenfg="\[\e[32m\]"
+    local yellowfg="\[\e[1;33m\]"
     local bluefg="\[\e[34m\]"
-    local greenfg="\[\e[1;32m\]"
     local endcolor="\[\e[0m\]"
 
     PS1="$blackbg"
@@ -19,11 +23,16 @@ __prompt() {
     else
         PS1+="$bluefg\W/"
     fi
-    # show git branch
+    # show branch, and if it's dirty
     if git rev-parse --git-dir &>/dev/null; then
-        PS1+=" $greenfg::$(git branch --show-current):: "
+        if git_dirty; then
+            PS1+=" $yellowfg"
+        else
+            PS1+=" $greenfg"
+        fi
+        PS1+="$(git branch --show-current) "
     fi
-    PS1+="$ $endcolor "
+    PS1+="$endcolor "
     history -a
 }
 PROMPT_COMMAND=__prompt
@@ -51,6 +60,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 # :: aliases
 
 alias e='${EDITOR}'
+alias f="fzf"
 alias ie='e $(fzf)'
 alias icd='cd $(fzf)'
 alias ls="ls --color=always --group-directories-first -I Desktop -I Documents -I Downloads -I Library -I Movies -I Music -I Pictures -I Public"

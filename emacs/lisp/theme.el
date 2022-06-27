@@ -4,15 +4,15 @@
   (load-theme-with-mods))
 
 (defun load-theme-with-mods()
-  (load-theme 'doom-nord t)
-  (set-face-foreground 'vertical-border "black")
-  (set-face-background 'vertical-border "#2e333f"))
+  (load-theme 'nord t)
+  (set-face-foreground 'vertical-border "black"))
 
+;; continuous vertical line for window separation
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?│))
 
-(use-package doom-themes
+(use-package nord-theme
   :config
   (if (daemonp)
       (add-hook 'after-make-frame-functions #'frame-local-load-theme)
