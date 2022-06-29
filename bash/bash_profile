@@ -12,14 +12,14 @@ __prompt() {
     local blackbg="\[\e[40m\]"
     local redfg="\[\e[31m\]"
     local greenfg="\[\e[32m\]"
-    local yellowfg="\[\e[1;33m\]"
+    local yellowfg="\[\e[33m\]"
     local bluefg="\[\e[34m\]"
     local endcolor="\[\e[0m\]"
 
     PS1="$blackbg"
     # diff color if the previous command failed
     if [ $prevexit -ne 0 ]; then
-        PS1+="$redfg[$prevexit] \W/"
+        PS1+="${redfg}[$prevexit] \W/"
     else
         PS1+="$bluefg\W/"
     fi
@@ -66,12 +66,12 @@ alias icd='cd $(fzf)'
 alias ls="ls --color=always --group-directories-first -I Desktop -I Documents -I Downloads -I Library -I Movies -I Music -I Pictures -I Public"
 alias lsa="ls -A"
 alias src="source ~/.bash_profile"
-alias ctop="grep -Ev '^ls|^ctop' $HISTFILE | sort | uniq -c | sort -n"
+alias ctop="grep -Ev '^ls|^ctop' \$HISTFILE | sort | uniq -c | sort -n"
 alias erc="e $CONFIG_DIR/emacs/init.el"
 alias shrc="e $CONFIG_DIR/bash/bash_profile"
 alias shbs="e $CONFIG_DIR/bash/bootstrap.sh"
 alias tmrc="e $CONFIG_DIR/tmux/tmux.conf"
-alias brain="e $HOME/.brain.org"
+alias brain="e \$HOME/.brain.org"
 
 alias gb="git branch"
 alias gbc="git checkout -b"
