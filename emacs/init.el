@@ -17,6 +17,7 @@
 (require 'tree-sitter)
 (require 'writeroom)
 (require 'ws-butler)
+(require 'folding)
 
 ;; programming language support
 (add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
