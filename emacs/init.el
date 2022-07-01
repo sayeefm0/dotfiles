@@ -18,6 +18,7 @@
 (require 'writeroom)
 (require 'ws-butler)
 (require 'folding)
+(require 'expand-region)
 
 ;; programming language support
 (add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
