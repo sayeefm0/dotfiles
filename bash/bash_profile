@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 CONFIG_DIR="$HOME/develop/dotfiles"
-SANDBOX="$HOME/develop/sandbox"
+SANDBOX="$HOME/sandbox"
 
 # :: environment variables
 

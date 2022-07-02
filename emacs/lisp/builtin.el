@@ -37,5 +37,6 @@
 (define-key usr-map (kbd "\C-c") #'delete-frame)
 (define-key usr-map (kbd "p") #'switch-to-prev-buffer)
 (define-key usr-map (kbd "n") #'notes)
+(define-key global-map (kbd "\C-x \C-b") 'ibuffer)
 
 (provide 'builtin)

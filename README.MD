@@ -44,7 +44,7 @@ for various programming languages, and link dotfiles into the right places.
 
 ## emacs
 
-```bash
+```
 dotfiles/emacs/
   init.el                   <-- Each line in init is effectively a toggle for a feature
   early-init.el
@@ -63,7 +63,7 @@ dotfiles/emacs/
   - ~~lsp ui~~, ~~centaur tabs~~, ~~modeline~~, ~~treemacs~~
 - I use `emacs -nw` and have not tested on GUI
 - I do not use terminal emulation in emacs
-- I use the [`gccemacs`] build (https://www.emacswiki.org/emacs/GccEmacs). When opening emacs for the first time, you may experience latency while packages are being compiled. 
+- I use the [`gccemacs` build](https://www.emacswiki.org/emacs/GccEmacs). When opening emacs for the first time, you may experience latency while packages are being compiled. 
 - `straight.el` instead of `package.el`.
 - Startup time can be found in `*Messages*`.
 

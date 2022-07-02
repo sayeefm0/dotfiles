@@ -17,6 +17,7 @@ main() {
     
     setup_go_env
     setup_bash_env
+    setup_web_env
 
     symlink_dotfiles
 }
@@ -102,6 +103,10 @@ setup_go_env() {
 setup_bash_env() {
     npm install bash-language-server
     brew install shellcheck    
+}
+
+setup_web_env() {
+    brew install sass/sass/sass
 }
 
 symlink_dotfiles() {
