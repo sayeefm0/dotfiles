@@ -1,6 +1,7 @@
 (use-package lsp-mode
   :bind
   (:map usr-map
+        ("l h" . lsp-describe-thing-at-point)
         ("l a" . lsp-execute-code-action)
         ("l r" . lsp-rename))
   :config

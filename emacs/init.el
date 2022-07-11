@@ -21,9 +21,8 @@
 (require 'expand-region)
 
 ;; programming language support
-(add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 (require 'lsp)
-;; langs
+(add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 (require 'bash)
 (require 'go)
 (require 'markdown)
