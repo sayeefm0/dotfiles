@@ -62,6 +62,7 @@ dotfiles/emacs/
 - Minimal UI (and config)
   - ~~lsp ui~~, ~~centaur tabs~~, ~~modeline~~, ~~treemacs~~
 - I use `emacs -nw` and have not tested on GUI
+- I primarily use `emacs --daemon` and have not done much testing with `emacs`.
 - I do not use terminal emulation in emacs
 - I use the [`gccemacs` build](https://www.emacswiki.org/emacs/GccEmacs). When opening emacs for the first time, you may experience latency while packages are being compiled. 
 - `straight.el` instead of `package.el`.

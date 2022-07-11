@@ -25,6 +25,7 @@
 (add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 (require 'bash)
 (require 'go)
+(require 'lisp)
 (require 'markdown)
 (require 'yaml)
 
