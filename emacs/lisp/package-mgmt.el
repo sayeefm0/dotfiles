@@ -1,6 +1,8 @@
 (defun init-packaging()
-  ;; Make sure straight and use-package are available
-  ;; Most of this is copy-pasted from the straight documentation
+  "Use `straight.el` as replacement package manager for `package.el`.
+
+Make sure `straight.el` and `use-package` are available.
+Most of this is copy-pasted from the straight documentation"
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))

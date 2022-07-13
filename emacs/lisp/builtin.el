@@ -2,10 +2,16 @@
 (global-hl-line-mode 1)
 (menu-bar-mode -1)
 
+(setq-default mode-line-format
+              '("%e"
+                " "
+                mode-line-buffer-identification
+                "  "
+                vc-mode))
+
 (setq-default
  indent-tabs-mode nil
- mode-line-format nil
- tab-width 2) ;
+ tab-width 2)
 
 (setq
  backup-directory-alist '(("." . "~/.emacs.d/backups"))

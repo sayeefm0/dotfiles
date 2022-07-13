@@ -7,18 +7,20 @@
 (require 'tmux)
 
 ;; external packages
+(require 'dim-other-buffers)
 (require 'avy)
 (require 'company)
+(require 'expand-region)
 (require 'flycheck)
+(require 'folding)
 (require 'fzf)
 (require 'magit)
 (require 'selectrum)
+(require 'switch-window)
 (require 'theme)
 (require 'tree-sitter)
 (require 'writeroom)
 (require 'ws-butler)
-(require 'folding)
-(require 'expand-region)
 
 ;; programming language support
 (require 'lsp)

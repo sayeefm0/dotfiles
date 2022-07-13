@@ -5,7 +5,17 @@
 
 (defun load-theme-with-mods()
   (load-theme 'nord t)
-  (set-face-foreground 'vertical-border "black"))
+  (let* ((nord00 "#292d38")
+         (nord0 "#2e3440")
+         (nord7 "#8fbcbb"))
+
+    (set-face-foreground 'vertical-border "black")
+    (set-face-attribute 'mode-line nil
+                        :background nord00
+                        :foreground nord7)
+    (set-face-attribute 'mode-line-inactive nil
+                        :background nord00
+                        :foreground nord0)))
 
 ;; continuous vertical line for window separation
 (set-display-table-slot standard-display-table
