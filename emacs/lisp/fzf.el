@@ -1,8 +1,8 @@
 (use-package fzf
   :bind
   (:map usr-map
-        ("C-f" . fzf-git-files)
-        ("C-g" . fzf-grep-dwim))
+        ("f i p" . fzf-git-files)
+        ("g m" . fzf-grep-dwim))
   :config
   (setq fzf/grep-cmd "rg --no-heading -H"))
 

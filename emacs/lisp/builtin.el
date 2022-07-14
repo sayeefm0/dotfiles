@@ -3,13 +3,6 @@
 (winner-mode 1)
 (menu-bar-mode -1)
 
-(setq-default mode-line-format
-              '("%e"
-                " "
-                mode-line-buffer-identification
-                "  "
-                vc-mode))
-
 (setq-default
  indent-tabs-mode nil
  tab-width 2)
@@ -34,18 +27,11 @@
     (if bounds
         (kill-region (car bounds) (cdr bounds)))))
 
-(defun notes()
-  (interactive)
-  (find-file-other-window "~/.brain.org"))
-
 (define-key usr-map (kbd "1") #'kill-other-buffers)
 (define-key usr-map (kbd "0") #'kill-current-buffer)
-(define-key usr-map (kbd "w") #'kill-word-at-point)
-(define-key usr-map (kbd "\C-c") #'delete-frame)
-(define-key usr-map (kbd "p") #'switch-to-prev-buffer)
-(define-key usr-map (kbd "n") #'notes)
-(define-key usr-map (kbd "C-u C-w") 'winner-undo)
-(define-key usr-map (kbd "C-u C-r C-w") 'winner-redo)
-(define-key global-map (kbd "\C-x \C-b") 'ibuffer)
+(define-key usr-map (kbd "k m") #'kill-word-at-point)
+(define-key usr-map (kbd "p b") #'switch-to-prev-buffer)
+(define-key usr-map (kbd "u l") 'winner-undo)
+(define-key usr-map (kbd "r l") 'winner-redo)
 
 (provide 'builtin)

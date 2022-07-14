@@ -1,12 +1,15 @@
 (use-package lsp-mode
   :bind
   (:map usr-map
-        ("l h" . lsp-describe-thing-at-point)
-        ("l a" . lsp-execute-code-action)
-        ("l r" . lsp-rename))
+        ("h c" . lsp-describe-thing-at-point)
+        ("r c c" . lsp-execute-code-action)
+        ("r n c" . lsp-rename))
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
   (lsp-register-custom-settings
    '(("gopls.completeUnimported" t t))))
+
+(use-package lsp-ui
+  :after (lsp-mode))
 
 (provide 'lsp)
