@@ -27,7 +27,8 @@
 (require 'writeroom)
 (require 'ws-butler)
 
-;; programming language support
+;; programming language/development support
+(require 'docker)
 (require 'lsp)
 (add-to-list 'load-path (expand-file-name "lisp/langs" user-emacs-directory))
 (require 'bash)

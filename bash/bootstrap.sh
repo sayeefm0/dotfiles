@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 DOTFILES_DIR="${1:-$HOME/dotfiles}"
 DEBUG="${2:-''}" # consider using a real flag one day
 STATUS=0
@@ -27,6 +26,7 @@ main() {
         install_nvm
 
         install_cli_utils
+        install_docker
         install_emacs
         install_tmux
         install_iterm
@@ -58,13 +58,6 @@ validate() {
     command -v dlv || { echo "ERROR: dlv is missing" ; status_failed; }
     # bash
     command -v shellcheck || { echo "ERROR: shellcheck is missing" ; status_failed; }
-
-    # make sure dotfiles were linked
-    diff "$DOT_EINIT" "$EINIT" -q || status_failed
-    diff "$DOT_INIT" "$INIT" -q || status_failed
-    diff "$DOT_SL" "$SL" -q || status_failed
-    diff "$DOT_BPROF" "$BPROF" -q || status_failed
-    diff "$DOT_TMRC" "$TMRC" -q || status_failed
 
     exit $STATUS
 }
@@ -99,6 +92,10 @@ install_nvm() {
 install_cli_utils() {
     brew install coreutils fd gh ripgrep fzf
     $(brew --prefix)/opt/fzf/install
+}
+
+install_docker() {
+    brew install docker --cask
 }
 
 install_fonts() {
