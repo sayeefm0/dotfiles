@@ -33,5 +33,7 @@
 (define-key usr-map (kbd "p b") #'switch-to-prev-buffer)
 (define-key usr-map (kbd "u l") 'winner-undo)
 (define-key usr-map (kbd "r l") 'winner-redo)
+(define-key usr-map (kbd "m s") 'point-to-register)
+(define-key usr-map (kbd "f s") 'jump-to-register)
 
 (provide 'builtin)

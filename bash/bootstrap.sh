@@ -1,47 +1,79 @@
 #!/bin/bash
 
+
 DOTFILES_DIR="${1:-$HOME/dotfiles}"
+DEBUG="${2:-''}" # consider using a real flag one day
+STATUS=0
+# emacs files
+DOT_EMACSD="$DOTFILES_DIR/emacs"
+EMACSD="$HOME/.emacs.d"
+DOT_EINIT="$DOT_EMACSD/early-init.el"
+EINIT="$EMACSD/early-init.el"
+DOT_INIT="$DOT_EMACSD/init.el"
+INIT="$EMACSD/init.el"
+DOT_SL="$DOT_EMACSD/lisp"
+SL="$EMACSD/lisp"
+# bash files
+DOT_BPROF="$DOTFILES_DIR/bash/bash_profile"
+BPROF="$HOME/.bash_profile"
+# tmux files
+DOT_TMRC="$DOTFILES_DIR/tmux/tmux.conf"
+TMRC="$HOME/.tmux.conf"
 
-# main function used to keep driving code near start of file
-# call to main near end of file, followed by basic validation
 main() {
-    set_default_shell /bin/bash
-    install_homebrew
-    install_nvm
+    if ! [ "$DEBUG" = "-d" ]; then
+        set_default_shell /bin/bash
+        install_homebrew
+        install_nvm
 
-    install_cli_utils
-    install_emacs
-    install_tmux    
-    install_iterm
-    install_fonts
-    
-    setup_go_env
-    setup_bash_env
-    setup_web_env
+        install_cli_utils
+        install_emacs
+        install_tmux
+        install_iterm
+        install_fonts
 
-    symlink_dotfiles
+        setup_go_env
+        setup_bash_env
+        setup_web_env
+
+        symlink_dotfiles
+    fi
+
+    validate
 }
 
 validate() {
     # validate package managers
-    command -v brew || exit 1
-    command -v nvm || exit 1
+    command -v brew || { echo "ERROR: homebrew is missing" ; status_failed; }
+    command -v nvm || { echo "ERROR: nvm is missing" ; status_failed; }
     # validate cli
-    command -v fd || exit 1
-    command -v gh || exit 1
-    command -v rg || exit 1
-    command -v emacs || exit 1
-    command -v tmux || exit 1
+    command -v fd || { echo "ERROR: fd is missing" ; status_failed; }
+    command -v rg || { echo "ERROR: rg is missing" ; status_failed; }
+    command -v gh || { echo "ERROR: gh is missing" ; status_failed; }
+    command -v emacs || { echo "ERROR: emacs is missing" ; status_failed; }
+    command -v tmux || { echo "ERROR: tmux is missing" ; status_failed; }
     # validate lang support
-    command -v go || exit 1
-    command -v gopls || exit 1
-    command -v dlv || exit 1
-    # TODO: is there a better way of checking this?
-    npm ls | grep bash-language-server || exit 1
-    command -v shellcheck || exit 1
+    command -v go || { echo "ERROR: go is missing" ; status_failed; }
+    command -v gopls || { echo "ERROR: gopls is missing" ; status_failed; }
+    command -v dlv || { echo "ERROR: dlv is missing" ; status_failed; }
+    # bash
+    command -v shellcheck || { echo "ERROR: shellcheck is missing" ; status_failed; }
+
+    # make sure dotfiles were linked
+    diff "$DOT_EINIT" "$EINIT" -q || status_failed
+    diff "$DOT_INIT" "$INIT" -q || status_failed
+    diff "$DOT_SL" "$SL" -q || status_failed
+    diff "$DOT_BPROF" "$BPROF" -q || status_failed
+    diff "$DOT_TMRC" "$TMRC" -q || status_failed
+
+    exit $STATUS
 }
 
 # utility functions
+
+status_failed() {
+    STATUS=1
+}
 
 set_default_shell() {
     if [ "$UID" -eq 0 ] && [ "$SHELL" != "$1" ] && [ -f "$1" ]; then
@@ -101,8 +133,7 @@ setup_go_env() {
 }
 
 setup_bash_env() {
-    npm install bash-language-server
-    brew install shellcheck    
+    brew install shellcheck
 }
 
 setup_web_env() {
@@ -110,24 +141,19 @@ setup_web_env() {
 }
 
 symlink_dotfiles() {
-    if ! [ -f "$HOME/.bash_profile" ]; then
-        ln -s "$DOTFILES_DIR/bash/bash_profile" "$HOME/.bash_profile"
-    fi
-    if ! [ -f "$HOME/.tmux.conf" ]; then
-        ln -s "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
-    fi
-    if [ -d "$HOME/.emacs.d" ]; then
-        if ! [ -f "$HOME/.emacs.d/early-init.el" ]; then
-            ln -s "$DOTFILES_DIR/emacs/early-init.el" "$HOME/.emacs.d/early-init.el"
-        fi
-        if ! [ -f "$HOME/.emacs.d/init.el" ]; then
-            ln -s "$DOTFILES_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
-        fi
-        if ! [ -d "$HOME/.emacs.d/lisp" ]; then
-            ln -s "$DOTFILES_DIR/emacs/lisp" "$HOME/.emacs.d/lisp"
-        fi
-    fi
+    rm "$BPROF"
+    ln -s "$DOT_BPROF" "$BPROF"
+
+    rm "$TMRC"
+    ln -s "$DOT_TMRC" "$TMRC"
+
+    mkdir -p "$EMACSD"
+    rm "$EINIT"
+    rm "$INIT"
+    rm -rf "$SL"
+    ln -s "$DOT_EINIT" "$EINIT"
+    ln -s "$DOT_INIT" "$INIT"
+    ln -s "$DOT_SL" "$SL"
 }
 
 main "$@"
-validate

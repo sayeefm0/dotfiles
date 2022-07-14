@@ -23,6 +23,7 @@
 (require 'switch-window)
 (require 'theme)
 (require 'tree-sitter)
+(require 'which-key)
 (require 'writeroom)
 (require 'ws-butler)
 
