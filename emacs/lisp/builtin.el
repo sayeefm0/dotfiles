@@ -1,5 +1,6 @@
 (electric-pair-mode 1)
 (global-hl-line-mode 1)
+(winner-mode 1)
 (menu-bar-mode -1)
 
 (setq-default mode-line-format
@@ -43,6 +44,8 @@
 (define-key usr-map (kbd "\C-c") #'delete-frame)
 (define-key usr-map (kbd "p") #'switch-to-prev-buffer)
 (define-key usr-map (kbd "n") #'notes)
+(define-key usr-map (kbd "C-u C-w") 'winner-undo)
+(define-key usr-map (kbd "C-u C-r C-w") 'winner-redo)
 (define-key global-map (kbd "\C-x \C-b") 'ibuffer)
 
 (provide 'builtin)

@@ -37,8 +37,8 @@ __prompt() {
 }
 PROMPT_COMMAND=__prompt
 
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -t"
+export EDITOR="emacs"
+export VISUAL="emacs"
 export HISTSIZE=2000
 shopt -s histappend
 
@@ -83,9 +83,6 @@ alias gs="git status"
 
 alias tmk="tmux kill-server"
 alias tmr="tmux new-session -As main"
-
-alias ek="killall emacs"
-alias er="emacs --daemon"
 
 alias gomt="go mod tidy"
 alias gocl="go clean -modcache"

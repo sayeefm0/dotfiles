@@ -7,9 +7,9 @@
 (require 'tmux)
 
 ;; external packages
-(require 'dim-other-buffers)
 (require 'avy)
 (require 'company)
+(require 'dim-other-buffers)
 (require 'expand-region)
 (require 'flycheck)
 (require 'folding)
