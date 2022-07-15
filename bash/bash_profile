@@ -81,9 +81,28 @@ alias gm="git merge"
 alias gp="git pull --ff-only"
 alias gs="git status"
 
+alias er="emacs --daemon"
+alias ec="emacsclient -t"
+
 alias tmk="tmux kill-server"
 alias tmr="tmux new-session -As main"
 
 alias gomt="go mod tidy"
 alias gocl="go clean -modcache"
 alias sgo="e $SANDBOX/main.go"
+
+# docker
+alias drc="docker exec -it"
+alias ddf="docker system df"
+## pruning
+alias dcche="yes | docker builder prune -a"
+alias dcimg="yes | docker image prune -a"
+alias dccnt="yes | docker container prune"
+## remove
+alias drcnt="docker rm -f"
+alias drimg="docker image rm"
+alias dstop="docker ps -q | xargs docker rm -f"
+## listing
+alias dlimg="docker images"
+alias dlcnt="docker ps -a --format \"table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.State}}\t{{.Mounts}}\t{{.Networks}}\""
+alias dscnt="docker ps --format \"table {{.Names}}\t{{.Image}}\""

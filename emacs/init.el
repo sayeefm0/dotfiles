@@ -18,6 +18,7 @@
 (require 'magit)
 (require 'multiple-cursors)
 (require 'neotree)
+(require 'all-org)
 (require 'powerline)
 (require 'selectrum)
 (require 'switch-window)
