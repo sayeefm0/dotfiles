@@ -7,6 +7,7 @@
 (require 'tmux)
 
 ;; external packages
+(require 'all-org)
 (require 'avy)
 (require 'company)
 (require 'dim-other-buffers)
@@ -18,7 +19,6 @@
 (require 'magit)
 (require 'multiple-cursors)
 (require 'neotree)
-(require 'all-org)
 (require 'powerline)
 (require 'selectrum)
 (require 'switch-window)

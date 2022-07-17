@@ -59,6 +59,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
 # :: aliases
 
+alias dev="cd \$(fd --type d -d 1 . ~/develop/ | fzf)"
 alias e='${EDITOR}'
 alias f="fzf"
 alias ie='e $(fzf)'
