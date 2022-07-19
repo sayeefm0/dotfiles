@@ -12,7 +12,6 @@ __prompt() {
     local blackbg="\[\e[40m\]"
     local redfg="\[\e[31m\]"
     local greenfg="\[\e[32m\]"
-    local yellowfg="\[\e[33m\]"
     local bluefg="\[\e[34m\]"
     local endcolor="\[\e[0m\]"
 
@@ -26,7 +25,7 @@ __prompt() {
     # show branch, and if it's dirty
     if git rev-parse --git-dir &>/dev/null; then
         if git_dirty; then
-            PS1+=" $yellowfg"
+            PS1+=" $redfg"
         else
             PS1+=" $greenfg"
         fi
@@ -59,7 +58,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1 # mute deprecation warning
 
 # :: aliases
 
-alias dev="cd \$(fd --type d -d 1 . ~/develop/ | fzf)"
+alias dev="cd \$(fd --type d -d 1 . ~/develop/ | fzf --color bw)"
 alias e='${EDITOR}'
 alias f="fzf"
 alias ie='e $(fzf)'
@@ -96,7 +95,7 @@ alias sgo="e $SANDBOX/main.go"
 alias drc="docker exec -it"
 alias ddf="docker system df"
 ## pruning
-alias dcche="yes | docker builder prune -a"
+alias dcbld="yes | docker builder prune -a"
 alias dcimg="yes | docker image prune -a"
 alias dccnt="yes | docker container prune"
 ## remove
