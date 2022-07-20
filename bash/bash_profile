@@ -106,3 +106,12 @@ alias dstop="docker ps -q | xargs docker rm -f"
 alias dlimg="docker images"
 alias dlcnt="docker ps -a --format \"table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.State}}\t{{.Mounts}}\t{{.Networks}}\""
 alias dscnt="docker ps --format \"table {{.Names}}\t{{.Image}}\""
+
+# networking
+fp() {
+     rg -w --no-line-number "$1"/tcp /etc/services
+}
+lrp() {
+    ps -Ao pid,user,group,command,etime,lstart | rg "$1"
+}
+alias lop="lsof -i -n -P | rg LISTEN"

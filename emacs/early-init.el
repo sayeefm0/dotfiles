@@ -1,10 +1,3 @@
-;;; early-init.el --- early configuration loaded prior to package initialization
-;;; Commentary:
-;; Disable 'package in favor of 'straight
-;;; Code:
-
-(setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil) ; use straight.el instead
 
 (provide 'early-init)
-
-;;; early-init.el ends here
